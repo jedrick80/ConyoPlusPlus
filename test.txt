@@ -1,0 +1,9 @@
+makeLagay asdf.cnyo db
+
+OMG asdf makeKuha 23 db
+
+superYaya
+{
+	makeArte inty jkl makeKuha 1+45 db
+	makeSulat("Hello World") db
+}

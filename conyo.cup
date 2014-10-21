@@ -1,0 +1,152 @@
+import java_cup.runtime.*;
+
+parser code {:
+	StringBuilder sb = new StringBuilder();
+	public void addText(String text)
+	{
+		sb.append(text + "\n");
+	}
+	public void printText()
+	{
+		System.out.print(sb);
+	}
+:};
+
+/* Terminals */
+terminal            MAKE_LAGAY, OMG, HIRE_YAYA, BAYAD, MAKE_BALIK, MAKE_TAPOS;
+terminal			SUPER_YAYA, MAKE_ARTE, BRAND_NEW, MAKE_UTUSAN, BREAKUP, MAKEUP;
+terminal			MAKE_TAWAG, MAKE_SULAT, MAKE_BASA, LIKE_KAPAG, THIS_NALANG, THIS_NALANG_KAPAG;
+terminal			MAKE_PALIT, MRW, MDR, LIKE_HABANG, MAKE_GAWA, MAKE_ULIT, INTY, FLOATY, CHARY;
+terminal			STRINGY, BOOLY, YUHH, NUHH, POOR, WALEY, MAKE_KUHA, DB;
+terminal			COMMA, COLON, DOLLAR_SIGN, LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE;
+terminal			LEFT_CURLY, RIGHT_CURLY, PERIOD, PLUS, MINUS, TIMES, DIVIDE, MODULO;
+terminal			NOT_EQUAL, LESS_THAN, LT_EQUAL, GREATER_THAN, GT_EQUAL, EQUAL_EQUAL, AND, OR;
+terminal			CNYO;
+terminal String		STRING;
+terminal Character 	CHARACTER;
+terminal Character	LETTER;
+terminal Float		FLOAT;			
+terminal Integer    INTEGER;
+terminal Character	UNDERSCORE;
+
+/* Non terminals */
+non terminal            conyogram, lagay_list, lagay_statement, file_type;
+non terminal			OMG_list, OMG_statement, yaya_list, yaya_dec;
+non terminal			yaya_param_list, yaya_param, yaya_content, yaya_end;
+non terminal			super_yaya, arte_list, arte_dec, arte, array_brackets;
+non terminal			arte_init, array_list, array_dec, sub_yaya_list, sub_yaya;
+non terminal			utos_list, utos_dec, utos_makeKuha, utos_makeTawag;
+non terminal			utos_makeSulat, utos_makeBasa, utos_likeKapag;
+non terminal			utos_thisNalang, utos_makePalit, makePalit_MRW;
+non terminal			utos_likeHabang, utos_makeGawaHabang, utos_makeUlit;
+non terminal			sabi_sabi, number_sabi_sabi, number_level_1, number_level_2;
+non terminal			number_increment, boolean_sabi_sabi, boolean_level_1;
+non terminal			boolean_level_2, boolean_level_3, compare, string_sabi_sabi;
+non terminal			all_type_names, type_names, all_data_types, integer;
+non terminal			floating_point, char, string, bool, void_name;
+non terminal			null, param_list, param;
+non terminal			ascii_asterisk;
+non terminal			ascii_plus, any_ascii, sign;
+non terminal			gets, endOfLine;
+non terminal String		valid_var, valid_name, validvar_cont;
+non terminal String		letter_number_plus;
+non terminal String		letters_plus, numbers_plus;
+non terminal Character	letter;
+non terminal Integer	number;
+non terminal Character	underscore;
+
+/* Precedences */
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE;
+
+/*Start*/
+start with conyogram;
+
+/**
+ * CONYO++ GRAMMAR RULES 
+ */
+ 
+/*OVERALL PROGRAM (CONYOGRAM)*/
+conyogram ::= lagay_list OMG_list yaya_list sub_yaya_list super_yaya
+				{: printText(); :}
+;
+
+/*INCLUDE LIBRARIES AND FILES (LAGAY LIST)*/
+lagay_list ::= lagay_statement lagay_list | 
+;
+lagay_statement ::= MAKE_LAGAY letter_number_plus:lnp PERIOD file_type endOfLine
+					{: addText("INCLUDED A NEW FILE!!!!: " + lnp); :}
+;
+file_type ::= CNYO;
+
+/*CONSTANT DECLARATION (OMG LIST)*/
+OMG_list ::= OMG_statement OMG_list | ;
+OMG_statement ::= OMG valid_name gets all_data_types endOfLine
+					{: addText("ADDED NEW CONSTANT!!!"); :}
+;
+
+/*FUNCTION DECLARATION (YAYA LIST)*/
+yaya_list ::= ;
+super_yaya ::= ;
+
+/*VARIABLE DECLARATION (ARTE LIST)*/
+
+/*CLASS DECLARATION (SUB YAYA)*/
+sub_yaya_list ::= ;
+
+/*PROGRAM CODE STATEMENTS (UTOS LIST)*/
+
+/*EXPRESSION RELATIONS (SABI-SABI RELATIONS)*/
+
+/*DATA TYPES*/
+all_data_types ::= integer 
+				| floating_point
+				| char
+				| string
+				| bool
+;
+integer ::= sign numbers_plus
+;
+floating_point ::= FLOAT
+;
+char ::= CHARACTER
+;
+string ::= STRING
+;
+bool ::= YUHH
+		| NUHH
+;
+void_name ::= POOR;
+null ::= WALEY;
+
+/*MISCELLANEOUS RELATIONS*/
+
+/*ALPHANUMERIC, etc.*/
+valid_name ::= letter:l validvar_cont:vvc {: RESULT = Character.toString(l) + vvc; :}
+			| underscore:u validvar_cont:vvc {: RESULT = Character.toString(u) + vvc; :}
+;
+validvar_cont ::= letter:l validvar_cont:vvc {: RESULT = Character.toString(l) + vvc; :}
+			| number:n validvar_cont:vvc {: RESULT = Integer.toString(n) + vvc; :}
+			| underscore:u validvar_cont:vvc {: RESULT = Character.toString(u) + vvc; :}
+			| {: RESULT = ""; :}
+;
+letter_number_plus ::= letter:l letter_number_plus:lnp {: RESULT = Character.toString(l) + lnp; :}
+					| number:i letter_number_plus:lnp {: RESULT = Integer.toString(i) + lnp; :}
+					| letter:l {: RESULT = Character.toString(l); :}
+					| number:i {: RESULT = Integer.toString(i); :}
+;
+letters_plus ::= letter:l letters_plus:lp {: RESULT = Character.toString(l) + lp; :}
+				| letter:l {: RESULT = Character.toString(l); :}
+;
+numbers_plus ::= number:n numbers_plus:np {: RESULT = Integer.toString(n) + np; :}
+				| number:n {: RESULT = Integer.toString(n); :}
+;
+letter ::= LETTER:l {: RESULT = l; :};
+number ::= INTEGER:i {: RESULT = i; :};
+underscore ::= UNDERSCORE:u {: RESULT = u; :};
+sign ::= PLUS
+		| MINUS
+		|
+;
+gets ::= MAKE_KUHA;
+endOfLine ::= DB;
