@@ -80,25 +80,57 @@ lagay_statement ::= MAKE_LAGAY letter_number_plus:lnp PERIOD file_type endOfLine
 file_type ::= CNYO;
 
 /*CONSTANT DECLARATION (OMG LIST)*/
-OMG_list ::= OMG_statement OMG_list | ;
+OMG_list ::= OMG_statement OMG_list | 
+;
 OMG_statement ::= OMG valid_name gets all_data_types endOfLine
 					{: addText("ADDED NEW CONSTANT!!!"); :}
 ;
 
 /*FUNCTION DECLARATION (YAYA LIST)*/
-yaya_list ::= ;
-super_yaya ::= ;
+yaya_list ::= 
+;
+/*yaya_dec ::= HIRE_YAYA valid_name BAYAD LEFT_PAREN yaya_param_list RIGHT_PAREN 
+			 MAKE_BALIK all_type_names valid_name yaya_content yaya_end
+				{: addText("ADDED NEW METHOD!!!"); :}
+;
+yaya_param_list ::= yaya_param | ;
+yaya_param ::= all_type_names valid_name COMMA yaya_param |
+			   all_type_names valid_name;*/
+yaya_content ::= DOLLAR_SIGN arte_list /*utos_dec*/ DOLLAR_SIGN;
+yaya_end ::= MAKE_TAPOS;
+super_yaya ::= SUPER_YAYA yaya_content yaya_end
+				{: addText("MAIN FUNCTION FOUND."); :}
+;
 
 /*VARIABLE DECLARATION (ARTE LIST)*/
 
+arte_list ::= arte_dec | 
+;
+arte_dec ::= arte arte_dec 
+			| arte;
+arte ::= MAKE_ARTE all_type_names:tn valid_name:vn arte_init endOfLine 
+			{: addText("NEW VARIABLE NAMED " + vn + " OF TYPE " + tn + " DECLARED."); :}
+;
+array_brackets ::= LEFT_BRACE numbers_plus RIGHT_BRACE 
+					/*| LEFT_BRACE valid_var RIGHT_BRACE*/;
+arte_init ::= 
+;
+
 /*CLASS DECLARATION (SUB YAYA)*/
-sub_yaya_list ::= ;
+sub_yaya_list ::= 
+;
 
 /*PROGRAM CODE STATEMENTS (UTOS LIST)*/
 
 /*EXPRESSION RELATIONS (SABI-SABI RELATIONS)*/
 
 /*DATA TYPES*/
+all_type_names ::= INTY 
+				| FLOATY 
+				| CHARY 
+				| STRINGY 
+				| BOOLY
+;
 all_data_types ::= integer 
 				| floating_point
 				| char
