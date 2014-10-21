@@ -1215,8 +1215,9 @@ class ConyoLexer implements java_cup.runtime.Scanner {
           /*do {
             System.out.println(scanner.next_token());
           } while (!scanner.zzAtEOF);*/
-			Parser p = new Parser(scanner);
-			p.parse();
+	  Parser p = new Parser(scanner);
+	  p.parse();
+
         }
         catch (java.io.FileNotFoundException e) {
           System.out.println("File not found : \""+argv[i]+"\"");
