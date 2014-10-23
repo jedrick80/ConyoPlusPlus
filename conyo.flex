@@ -39,8 +39,10 @@ newline = \r|\n|\r\n
 white_space = [\n\r\ \t\b\012] | {newline}
 
 /*Validation regex*/
+
 valid_char = [^\n\r\"\\]
 valid_string = {valid_char}*
+identifier = [a-zA-Z_][a-zA-Z0-9_]*
 
 /*Numeric values*/
 integer = 0 | [1-9]{number}*
@@ -86,6 +88,7 @@ float = {integer}\.{integer}(e{integer})?
 <YYINITIAL> "poor" {return symbol(sym.POOR);}
 <YYINITIAL> "waley" {return symbol(sym.WALEY);}
 <YYINITIAL> "makeKuha" {return symbol(sym.MAKE_KUHA);}
+<YYINITIAL> "makeSimula" {return symbol(sym.MAKE_SIMULA);}
 <YYINITIAL> "db" {return symbol(sym.DB);}
 <YYINITIAL> "cnyo" {return symbol(sym.CNYO);}
 
@@ -120,9 +123,8 @@ float = {integer}\.{integer}(e{integer})?
 	
 	/*Literals*/
 	{integer} {return symbol(sym.INTEGER, Integer.parseInt(yytext()));}
-	{letter} {return symbol(sym.LETTER, yytext().charAt(0));}
 	{float} {return symbol(sym.FLOAT, Float.parseFloat(yytext()));}
-	{underscore} {return symbol(sym.UNDERSCORE, yytext().charAt(0));}
+	{identifier} {return symbol(sym.IDENTIFIER, yytext());}
 }
 
 /*When inputting a string*/
