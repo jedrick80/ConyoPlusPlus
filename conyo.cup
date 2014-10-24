@@ -31,6 +31,8 @@ terminal Float		FLOAT_LITERAL;
 terminal Integer    INT_LITERAL;
 terminal String		BOOL_LITERAL;
 terminal String		WALEY;
+/*Terminals for precedence*/
+terminal			LONG_NAME, SHORT_NAME;
 
 /* Non terminals */
 /*Program*/
@@ -111,6 +113,10 @@ non terminal			comparison;
 non terminal			arithmetic_1;
 non terminal			arithmetic_2;
 
+/*Precedences*/
+precedence left SHORT_NAME;
+precedence left LONG_NAME;
+
 /*Start*/
 start with conyogram;
 
@@ -165,8 +171,8 @@ array_dt ::= primitive_dt brackets
 			| valid_name brackets;
 			
 valid_name ::= IDENTIFIER
-			| valid_name COLON IDENTIFIER;
-valid_var ::= valid_name
+			| valid_name COLON IDENTIFIER %prec LONG_NAME;
+valid_var ::= valid_name %prec SHORT_NAME
 			| valid_name ref_brackets;
 			
 /*Class Declaration Productions*/
