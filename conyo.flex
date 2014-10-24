@@ -78,15 +78,15 @@ float = {integer}\.{integer}(e{integer})?
 <YYINITIAL> "likeHabang" {return symbol(sym.LIKE_HABANG);}
 <YYINITIAL> "makeGawa" {return symbol(sym.MAKE_GAWA);}
 <YYINITIAL> "makeUlit" {return symbol(sym.MAKE_ULIT);}
-<YYINITIAL> "inty" {return symbol(sym.INTY);}
-<YYINITIAL> "floaty" {return symbol(sym.FLOATY);}
-<YYINITIAL> "chary" {return symbol(sym.CHARY);}
-<YYINITIAL> "stringy" {return symbol(sym.STRINGY);}
-<YYINITIAL> "booly" {return symbol(sym.BOOLY);}
-<YYINITIAL> "yuhh" {return symbol(sym.YUHH);}
-<YYINITIAL> "nuhh" {return symbol(sym.NUHH);}
-<YYINITIAL> "poor" {return symbol(sym.POOR);}
-<YYINITIAL> "waley" {return symbol(sym.WALEY);}
+<YYINITIAL> "inty" {return symbol(sym.INTY, yytext());}
+<YYINITIAL> "floaty" {return symbol(sym.FLOATY, yytext());}
+<YYINITIAL> "chary" {return symbol(sym.CHARY, yytext());}
+<YYINITIAL> "stringy" {return symbol(sym.STRINGY, yytext());}
+<YYINITIAL> "booly" {return symbol(sym.BOOLY, yytext());}
+<YYINITIAL> "yuhh" {return symbol(sym.BOOL_LITERAL, yytext());}
+<YYINITIAL> "nuhh" {return symbol(sym.BOOL_LITERAL, yytext());}
+<YYINITIAL> "poor" {return symbol(sym.POOR, yytext());}
+<YYINITIAL> "waley" {return symbol(sym.WALEY, yytext());}
 <YYINITIAL> "makeKuha" {return symbol(sym.MAKE_KUHA);}
 <YYINITIAL> "makeSimula" {return symbol(sym.MAKE_SIMULA);}
 <YYINITIAL> "db" {return symbol(sym.DB);}
@@ -118,24 +118,25 @@ float = {integer}\.{integer}(e{integer})?
 	"==" { return symbol(sym.EQUAL_EQUAL); }
 	"&"  { return symbol(sym.AND); }
 	"|"  { return symbol(sym.OR); }
+	"!" { return symbol(sym.NOT); }
 	\'  { yybegin(CHARACTER); }
 	\" { yybegin(STRING); }
 	
 	/*Literals*/
-	{integer} {return symbol(sym.INTEGER, Integer.parseInt(yytext()));}
-	{float} {return symbol(sym.FLOAT, Float.parseFloat(yytext()));}
+	{integer} {return symbol(sym.INT_LITERAL, Integer.parseInt(yytext()));}
+	{float} {return symbol(sym.FLOAT_LITERAL, Float.parseFloat(yytext()));}
 	{identifier} {return symbol(sym.IDENTIFIER, yytext());}
 }
 
 /*When inputting a string*/
 <STRING> { 
-	\" {yybegin(YYINITIAL); return symbol(sym.MAKE_LAGAY);}
-	{valid_string} {return symbol(sym.STRING, yytext());}
+	\" {yybegin(YYINITIAL);}
+	{valid_string} {return symbol(sym.STRING_LITERAL, yytext());}
 }
 
 /*When inputting a character*/
 <CHARACTER> {
-	{valid_char}\' {yybegin(YYINITIAL); return symbol(sym.CHARACTER, yytext().substring(0, 1));}
+	{valid_char}\' {yybegin(YYINITIAL); return symbol(sym.CHAR_LITERAL, yytext().substring(0, 1));}
 }
 
 {white_space} {/*blank*/}
