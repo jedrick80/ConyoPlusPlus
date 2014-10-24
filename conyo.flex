@@ -118,6 +118,8 @@ float = {integer}\.{integer}(e{integer})?
 	"!" { return symbol(sym.NOT); }
 	\'  { yybegin(CHARACTER); }
 	\" { yybegin(STRING); }
+	"++" { return symbol(sym.POS_INC); }
+	"--" { return symbol(sym.NEG_INC); }
 	
 	/*Literals*/
 	{integer} {return symbol(sym.INT_LITERAL, Integer.parseInt(yytext()));}
