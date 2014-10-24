@@ -93,16 +93,19 @@ non terminal			utos_makeUlit;
 /*Expression Relations*/
 non terminal			sabi_sabi_end;
 non terminal			sabi_sabi;
-non terminal			number_sabi_sabi;
-non terminal			number_level_1;
-non terminal			number_level_2;
-non terminal			number_increment;
-non terminal			boolean_sabi_sabi;
-non terminal			boolean_level_1;
-non terminal			boolean_level_2;
-non terminal			boolean_level_3;
-non terminal			compare;
-non terminal			string_sabi_sabi;
+non terminal			ss_OR;
+non terminal			ss_AND;
+non terminal			ss_equality;
+non terminal			ss_comparison;
+non terminal			ss_a1;
+non terminal			ss_a2;
+non terminal			ss_unary_1;
+non terminal			ss_unary_2;
+non terminal			ss_paren;
+non terminal			equality;
+non terminal			comparison;
+non terminal			arithmetic_1;
+non terminal			arithmetic_2;
 
 /*Start*/
 start with conyogram;
@@ -204,7 +207,7 @@ arte_init_list ::= arte_init COMMA arte_init_list
 				
 brackets ::= LEFT_BRACE RIGHT_BRACE brackets
 			| LEFT_BRACE RIGHT_BRACE;
-ref_brackets ::= LEFT_BRACE number_sabi_sabi RIGHT_BRACE;
+ref_brackets ::= LEFT_BRACE sabi_sabi RIGHT_BRACE;
 
 /*Program Code Productions*/
 
@@ -224,23 +227,23 @@ utos_dec ::= utos_makeKuha DB
 			| BREAKUP DB
 			| MAKEUP DB;
 utos_makeKuha ::= valid_var arte_assign
-				| valid_var number_increment;
+				| sabi_sabi;
 utos_makeTawag ::= MAKE_TAWAG valid_name LEFT_PAREN arte_init_list RIGHT_PAREN;
-utos_makeSulat ::= MAKE_SULAT LEFT_PAREN string_sabi_sabi RIGHT_PAREN;
+utos_makeSulat ::= MAKE_SULAT LEFT_PAREN sabi_sabi RIGHT_PAREN;
 utos_makeBasa ::= MAKE_BASA LEFT_PAREN data_type RIGHT_PAREN;
-utos_likeKapag ::= LIKE_KAPAG LEFT_PAREN boolean_sabi_sabi RIGHT_PAREN utos_block utos_thisNalang;
+utos_likeKapag ::= LIKE_KAPAG LEFT_PAREN sabi_sabi RIGHT_PAREN utos_block utos_thisNalang;
 utos_thisNalang ::= THIS_NALANG utos_block
-				| THIS_NALANG_KAPAG LEFT_PAREN boolean_sabi_sabi RIGHT_PAREN utos_block utos_thisNalang
+				| THIS_NALANG_KAPAG LEFT_PAREN sabi_sabi RIGHT_PAREN utos_block utos_thisNalang
 				| ;
 utos_makePalit ::= MAKE_PALIT LEFT_PAREN sabi_sabi RIGHT_PAREN DOLLAR_SIGN makePalit_MRW DOLLAR_SIGN;
 makePalit_MRW ::= MRW sabi_sabi COLON utos_block_opt makePalit_MRW
 				| MDR COLON utos_block_opt
 				| ;
-utos_likeHabang ::= LIKE_HABANG LEFT_PAREN boolean_sabi_sabi RIGHT_PAREN utos_block
-				| LIKE_HABANG LEFT_PAREN boolean_sabi_sabi RIGHT_PAREN DB;
-utos_makeGawaHabang ::= MAKE_GAWA utos_block LIKE_HABANG LEFT_PAREN boolean_sabi_sabi RIGHT_PAREN DB;
-utos_makeUlit ::= MAKE_ULIT LEFT_PAREN utos_makeKuha DB boolean_sabi_sabi DB utos_makeKuha RIGHT_PAREN utos_block
-			| MAKE_ULIT LEFT_PAREN valid_var DB boolean_sabi_sabi DB utos_makeKuha RIGHT_PAREN utos_block;
+utos_likeHabang ::= LIKE_HABANG LEFT_PAREN sabi_sabi RIGHT_PAREN utos_block
+				| LIKE_HABANG LEFT_PAREN sabi_sabi RIGHT_PAREN DB;
+utos_makeGawaHabang ::= MAKE_GAWA utos_block LIKE_HABANG LEFT_PAREN sabi_sabi RIGHT_PAREN DB;
+utos_makeUlit ::= MAKE_ULIT LEFT_PAREN utos_makeKuha DB sabi_sabi DB utos_makeKuha RIGHT_PAREN utos_block
+			| MAKE_ULIT LEFT_PAREN valid_var DB sabi_sabi DB utos_makeKuha RIGHT_PAREN utos_block;
 
 /*Expression Productions*/
 
@@ -248,42 +251,42 @@ sabi_sabi_end ::= valid_var
 				| utos_makeTawag
 				| utos_makeBasa
 				| literal;
-sabi_sabi ::= number_sabi_sabi
-			| boolean_sabi_sabi
-			| string_sabi_sabi;
+	
+sabi_sabi ::= ss_OR;
+ss_OR ::= ss_AND OR OR ss_OR
+		| ss_AND;
+ss_AND ::= ss_equality AND AND ss_AND
+		| ss_equality;
+ss_equality ::= ss_comparison equality ss_equality
+			| ss_comparison;
+ss_comparison ::= ss_a1 comparison ss_comparison
+			|	ss_a1;
+ss_a1 ::= ss_a2 arithmetic_1 ss_a1
+		| ss_a2;
+ss_a2 ::= ss_unary_1 arithmetic_2 ss_a2
+		| ss_unary_1;
+ss_unary_1 ::= NOT ss_unary_1
+			| PLUS PLUS ss_unary_1
+			| MINUS MINUS ss_unary_1
+			| ss_unary_2;
+ss_unary_2 ::= ss_unary_2 PLUS PLUS
+			| ss_unary_2 MINUS MINUS
+			| ss_paren;
+ss_paren ::= LEFT_PAREN ss_paren RIGHT_PAREN
+			| sabi_sabi_end;
 			
-number_sabi_sabi ::= number_level_1 PLUS number_sabi_sabi
-				| number_level_1 MINUS number_sabi_sabi
-				| number_level_1
-				| number_increment;
-number_level_1 ::= number_level_2 TIMES number_level_1
-				| number_level_2 DIVIDE number_level_1
-				| number_level_2 MODULO number_level_1
-				| number_level_2;
-number_level_2 ::= LEFT_PAREN number_level_2 RIGHT_PAREN
-				| sabi_sabi_end;
-number_increment ::= number_level_2 PLUS PLUS
-				| number_level_2 MINUS MINUS;
-				
-boolean_sabi_sabi ::= number_sabi_sabi compare number_sabi_sabi
-				| string_sabi_sabi EQUAL_EQUAL string_sabi_sabi
-				| string_sabi_sabi NOT_EQUAL string_sabi_sabi
-				| boolean_level_1 EQUAL_EQUAL boolean_sabi_sabi
-				| boolean_level_1 NOT_EQUAL boolean_sabi_sabi
-				| boolean_level_1;
-boolean_level_1 ::= boolean_level_2 OR OR boolean_level_1
-				| boolean_level_2;
-boolean_level_2 ::= boolean_level_3 AND AND boolean_level_2
-				| boolean_level_3;
-boolean_level_3 ::= LEFT_PAREN boolean_level_3 RIGHT_PAREN
-				| NOT boolean_level_3
-				| sabi_sabi_end;
-compare ::= EQUAL_EQUAL
-		| GT_EQUAL
-		| LT_EQUAL
-		| GREATER_THAN
-		| LESS_THAN
-		| NOT_EQUAL;
+equality ::= EQUAL_EQUAL
+			| NOT_EQUAL;
 
-string_sabi_sabi ::= sabi_sabi_end PLUS string_sabi_sabi
-				| sabi_sabi_end;
+comparison ::= GT_EQUAL
+			| LT_EQUAL
+			| GREATER_THAN
+			| LESS_THAN;
+			
+arithmetic_1 ::= PLUS
+			| MINUS;
+
+arithmetic_2 ::= TIMES
+			| DIVIDE
+			| MODULO;
+
