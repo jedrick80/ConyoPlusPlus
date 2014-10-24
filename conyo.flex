@@ -54,12 +54,10 @@ float = {integer}\.{integer}(e{integer})?
 
 %%
 /*Keywords*/
-<YYINITIAL> "makeLagay" {return symbol(sym.MAKE_LAGAY);}
 <YYINITIAL> "OMG" {return symbol(sym.OMG);}
 <YYINITIAL> "hireYaya" {return symbol(sym.HIRE_YAYA);}
 <YYINITIAL> "bayad" {return symbol(sym.BAYAD);}
 <YYINITIAL> "makeBalik" {return symbol(sym.MAKE_BALIK);}
-<YYINITIAL> "makeTapos" {return symbol(sym.MAKE_TAPOS);}
 <YYINITIAL> "superYaya" {return symbol(sym.SUPER_YAYA);}
 <YYINITIAL> "makeArte" {return symbol(sym.MAKE_ARTE);}
 <YYINITIAL> "brandNew" {return symbol(sym.BRAND_NEW);}
@@ -90,7 +88,6 @@ float = {integer}\.{integer}(e{integer})?
 <YYINITIAL> "makeKuha" {return symbol(sym.MAKE_KUHA);}
 <YYINITIAL> "makeSimula" {return symbol(sym.MAKE_SIMULA);}
 <YYINITIAL> "db" {return symbol(sym.DB);}
-<YYINITIAL> "cnyo" {return symbol(sym.CNYO);}
 
 /*YYINITIAL State*/
 <YYINITIAL> {
