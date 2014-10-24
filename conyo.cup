@@ -21,7 +21,7 @@ terminal			STRINGY, BOOLY, YUHH, NUHH, POOR, WALEY, MAKE_KUHA, MAKE_SIMULA, DB;
 terminal			COMMA, COLON, DOLLAR_SIGN, LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE;
 terminal			LEFT_CURLY, RIGHT_CURLY, PERIOD, PLUS, MINUS, TIMES, DIVIDE, MODULO;
 terminal			NOT_EQUAL, LESS_THAN, LT_EQUAL, GREATER_THAN, GT_EQUAL, EQUAL_EQUAL, AND, OR;
-terminal			CNYO, IDENTIFIER;
+terminal			CNYO, IDENTIFIER, NOT;
 terminal String		STRING;
 terminal Character 	CHARACTER;
 terminal Character	LETTER;
@@ -30,21 +30,25 @@ terminal Integer    INTEGER;
 terminal Character	UNDERSCORE;
 
 /* Non terminals */
-non terminal            conyogram, lagay_list, lagay_statement, file_type;
-non terminal			OMG_list, OMG_statement, yaya_list, yaya_dec;
-non terminal			yaya_param_list, yaya_param, yaya_content, yaya_end;
-non terminal			super_yaya, arte_list, arte_dec, arte, array_brackets;
-non terminal			arte_init, array_list, array_dec, sub_yaya_list, sub_yaya;
-non terminal			utos_list, utos_dec, utos_makeKuha, utos_makeTawag;
-non terminal			utos_makeSulat, utos_makeBasa, utos_likeKapag;
-non terminal			utos_thisNalang, utos_makePalit, makePalit_MRW;
-non terminal			utos_likeHabang, utos_makeGawaHabang, utos_makeUlit;
-non terminal			sabi_sabi, number_sabi_sabi, number_level_1, number_level_2;
-non terminal			number_increment, boolean_sabi_sabi, boolean_level_1;
-non terminal			boolean_level_2, boolean_level_3, compare, string_sabi_sabi;
-non terminal			all_type_names, type_names, all_data_types, integer;
-non terminal			floating_point, char, string, bool, void_name;
-non terminal			null, param_list, param;
+non terminal            conyogram, lagay section, lagay_list, lagay_dec, file_type;
+non terminal			OMG_section, OMG_list, OMG_dec, yaya_section, yaya_list;
+non terminal			sub_yaya_section, sub_yaya_list, super_yaya;
+non terminal			literal, data_type, primitive_dt, reference_dt, array_dt;
+non terminal 			valid_name, valid_var;
+non terminal 			sub_yaya, sy_body, sy_opt, sy_cont_list, sy_cont;
+non terminal			constructor, sy_init;
+non terminal			arte_dec, arte_assign, arte_init;
+non terminal			yaya, yaya_header, yaya_param_sec, yaya_param_list, yaya_param;
+non terminal			array_init, arte_init_list, brackets, ref_brackets;
+non terminal 			utos_block, utos_block_opt, block_content, utos_dec;
+non terminal			utos_makeKuha, utos_makeTawag, utos_makeSulat, utos_makeBasa;
+non terminal			utos_likeKapag, utos_thisNalang, utos_makePalit, makePalit_MRW;
+non terminal 			utos_likeHabang, utos_makeGawaHabang, utos_makeUlit;
+non terminal			sabi_sabi_end, sabi_sabi, number_sabi_sabi, number_level_1;
+non terminal 			number_level_2,  number_increment, boolean_sabi_sabi;
+non terminal			boolean_level_1, boolean_level_2, boolean_level_3, compare;
+non terminal			string_sabi_sabi, int_literal, float_literal, char_literal;
+non terminal			string_literal, bool_literal, null_name, void_name, param_list, param;
 non terminal			ascii_asterisk;
 non terminal			ascii_plus, any_ascii, sign;
 non terminal			gets, endOfLine;
@@ -67,93 +71,216 @@ start with conyogram;
  */
  
 /*OVERALL PROGRAM (CONYOGRAM)*/
-conyogram ::= lagay_list OMG_list yaya_list sub_yaya_list super_yaya
+conyogram ::= lagay_section OMG_section yaya_section sub_yaya_section super_yaya
 				{: printText(); :}
 ;
 
-/*INCLUDE LIBRARIES AND FILES (LAGAY LIST)*/
-lagay_list ::= lagay_statement lagay_list | 
+/*PROGRAM BREAKDOWN*/
+lagay_section ::= lagay_list |
 ;
-lagay_statement ::= MAKE_LAGAY IDENTIFIER:id PERIOD file_type endOfLine
+lagay_list :: = lagay_dec 
+					| lagay_dec lagay_list;
+lagay_dec ::= MAKE_LAGAY IDENTIFIER:id PERIOD file_type endOfLine
 					{: addText("INCLUDED A NEW FILE: " + id); :}
 ;
 file_type ::= CNYO;
 
-/*CONSTANT DECLARATION (OMG LIST)*/
-OMG_list ::= OMG_statement OMG_list | 
+OMG_section ::= OMG_list | 
 ;
-OMG_statement ::= OMG IDENTIFIER:id gets all_data_types:dt endOfLine
+OMG_list ::= OMG_dec 
+				| OMG_dec OMG_list;
+OMG_dec ::= OMG IDENTIFIER:id gets all_data_types:dt endOfLine
 					{: addText("ADDED NEW CONSTANT " + id + " OF TYPE " + dt + "."); :}
 ;
 
-/*FUNCTION DECLARATION (YAYA LIST)*/
-yaya_list ::= 
+yaya_section ::= yaya_list | 
 ;
-/*yaya_dec ::= HIRE_YAYA valid_name BAYAD LEFT_PAREN yaya_param_list RIGHT_PAREN 
-			 MAKE_BALIK all_type_names valid_name yaya_content yaya_end
-				{: addText("ADDED NEW METHOD!!!"); :}
+yaya_list ::= yaya
+				| yaya yaya_list;
+				
+sub_yaya_section ::= sub_yaya_list |
 ;
-yaya_param_list ::= yaya_param | ;
-yaya_param ::= all_type_names valid_name COMMA yaya_param |
-			   all_type_names valid_name;*/
-yaya_content ::= DOLLAR_SIGN arte_list /*utos_dec*/ DOLLAR_SIGN;
-yaya_end ::= MAKE_TAPOS;
-super_yaya ::= SUPER_YAYA yaya_content yaya_end
-				{: addText("MAIN FUNCTION FOUND."); :}
-;
+sub_yaya_list ::= sub_yaya 
+					| sub_yaya sub_yaya_list;
 
-/*VARIABLE DECLARATION (ARTE LIST)*/
+super_yaya ::= SUPER_YAYA utos_block;
 
-arte_list ::= arte_dec | 
-;
-arte_dec ::= arte arte_dec 
-			| arte;
-arte ::= MAKE_ARTE all_type_names:tn IDENTIFIER:id arte_init endOfLine 
-			{: addText("NEW VARIABLE NAMED " + id + " OF TYPE " + tn + " DECLARED."); :}
-;
-array_brackets ::= LEFT_BRACE numbers_plus RIGHT_BRACE 
-					/*| LEFT_BRACE valid_var RIGHT_BRACE*/;
-arte_init ::= 
-;
-
-/*CLASS DECLARATION (SUB YAYA)*/
-sub_yaya_list ::= 
-;
-
-/*PROGRAM CODE STATEMENTS (UTOS LIST)*/
-
-/*EXPRESSION RELATIONS (SABI-SABI RELATIONS)*/
-
-/*DATA TYPES*/
-all_type_names ::= INTY 
+/* LITERALS, DATA TYPES, NAMES */
+literal ::=  int_literal 
+			| float_literal
+			| string_literal
+			| char_literal
+			| bool_literal
+			| null_name;
+data_type ::= primitive_dt 
+				| reference_dt;
+primitive_dt ::= INTY 
 				| FLOATY 
 				| CHARY 
 				| STRINGY 
-				| BOOLY
+				| BOOLY;
+reference_dt ::= valid_name 
+					| array_dt;
+array_dt ::= primitive_dt brackets 
+				| valid_name brackets;
+valid_name ::= IDENTIFIER 
+				| IDENTIFIER COLON valid_name;
+valid_var ::= valid_name 
+				| valid_name ref_brackets;				
+			
+/* CLASS DECLARATION PRODUCTIONS */
+sub_yaya ::= MAKE_UTUSAN IDENTIFIER sy_body;
+sy_body ::= DOLLAR_SIGN sy_opt DOLLAR_SIGN;
+sy_opt ::= sy_cont_list |
 ;
-all_data_types ::= integer 
-				| floating_point
-				| char
-				| string
-				| bool
+sy_cont_list ::= sy_cont sy_cont_list
+					| sy_cont;
+sy_cont ::= arte_dec
+			| yaya 
+			| constructor;
+constructor ::= MAKE_SIMULA IDENTIFIER utos_block;
+sy_init ::= BRAND_NEW reference_dt LEFT_PAREN arte_init_list RIGHT_PAREN;			
+	
+/*VARIABLE DECLARATION PRODUCTIONS*/
+arte_dec ::= MAKE_ARTE data_type:tn IDENTIFIER:id arte_assign endOfLine 
+			{: addText("NEW VARIABLE NAMED " + id + " OF TYPE " + tn + " DECLARED."); :}
 ;
-integer ::= sign numbers_plus
+arte_assign ::= MAKE_KUHA arte_init;
+arte_init ::= sabi_sabi
+				| array_init
+				| sy_init;
+	
+/*FUNCTION DECLARATION PRODUCTIONS*/
+yaya ::= yaya_header utos_block;
+yaya_header ::= HIRE_YAYA IDENTIFIER:name BAYAD LEFT_PAREN yaya_param_sec RIGHT_PAREN 
+			 MAKE_BALIK data_type IDENTIFIER:dt yaya_content yaya_end
+				{: addText("ADDED NEW METHOD " + name + " , RETURNS " + dt + "."); :}
+				| HIRE_YAYA IDENTIFIER:name BAYAD LEFT_PAREN yaya_param_sec RIGHT_PAREN 
+			 MAKE_BALIK void_name
+				{: addText("ADDED NEW METHOD " + name + "."); :}
 ;
-floating_point ::= FLOAT
+yaya_param_sec ::= yaya_param_list | 
 ;
-char ::= CHARACTER
+yaya_param_list ::= yaya_param COMMA yaya_param_list 
+					| yaya_param;
+yaya_param ::= data_type IDENTIFIER;
+
+/*ARRAY PRODUCTIONS*/
+array_init ::= LEFT_CURLY arte_init_list RIGHT_CURLY
+				| LEFT_CURLY RIGHT_CURLY;
+arte_init_list ::= arte_init COMMA arte_init_list 
+					| arte_init;
+brackets ::= LEFT_BRACE RIGHT_BRACE brackets
+				| LEFT_BRACE RIGHT_BRACE;
+ref_brackets ::= LEFT_BRACE number_sabi_sabi RIGHT_BRACE;
+
+/*PROGRAM CODE STATEMENTS (UTOS LIST)*/
+utos_block ::= DOLLAR_SIGN utos_block_opt DOLLAR_SIGN;
+utos_block_opt ::= block_content |
 ;
-string ::= STRING
+block_content ::= utos_dec block_content 
+					| utos_dec;
+utos_dec ::= utos_makeKuha endOfLine
+				| utos_makeTawag endOfLine
+				| utos_makeSulat endOfLine
+				| utos_makeBasa endOfLine
+				| utos_likeKapag 
+				| utos_makePalit
+				| utos_likeHabang 
+				| utos_makeGawaHabang 
+				| utos_makeUlit 
+				| BREAKUP endOfLine
+				| MAKEUP endOfLine
+				| ;
+utos_makeKuha ::= valid_var arte_assign 
+					| valid_var number_increment;
+utos_makeTawag ::= MAKE_TAWAG valid_name LEFT_PAREN arte_init_list RIGHT_PAREN;
+utos_makeSulat ::= MAKE_SULAT LEFT_PAREN string_sabi_sabi RIGHT_PAREN;
+utos_makeBasa ::= MAKE_BASA LEFT_PAREN data_type RIGHT_PAREN;
+utos_likeKapag ::= LIKE_KAPAG LEFT_PAREN boolean_sabi_sabi RIGHT_PAREN 
+					utos_block utos_thisNalang;
+utos_thisNalang ::= THIS_NALANG utos_block 
+					| THIS_NALANG_KAPAG LEFT_PAREN boolean_sabi_sabi RIGHT_PAREN
+						utos_block utos_thisNalang
+					| ;
+utos_makePalit ::= MAKE_PALIT LEFT_PAREN sabi_sabi RIGHT_PAREN 
+					DOLLAR_SIGN makePalit_MRW DOLLAR_SIGN;
+makePalit_MRW ::= MRW sabi_sabi COLON utos_block_opt makePalit_MRW
+					| MDR COLON utos_block_opt
+					| ;
+utos_likeHabang ::= LIKE_HABANG LEFT_PAREN boolean_sabi_sabi RIGHT_PAREN utos_block
+					| LIKE_HABANG LEFT_PAREN boolean_sabi_sabi RIGHT_PAREN endOfLine;
+utos_makeGawaHabang ::= MAKE_GAWA utos_block LIKE_HABANG LEFT_PAREN 
+						boolean_sabi_sabi RIGHT_PAREN endOfLine;
+utos_makeUlit ::= MAKE_ULIT LEFT_PAREN utos_makeKuha endOfLine boolean_sabi_sabi
+					endOfLine utos_makeKuha RIGHT_PAREN utos_block
+					| MAKE_ULIT LEFT_PAREN valid_var endOfLine boolean_sabi_sabi
+					endOfLine utos_makeKuha RIGHT_PAREN utos_block;
+
+/*EXPRESSION PRODUCTIONS*/
+sabi_sabi_end ::= valid_var
+					| utos_makeTawag
+					| utos_makeBasa;
+sabi_sabi ::= number_sabi_sabi
+				| boolean_sabi_sabi
+				| string_sabi_sabi;
+number_sabi_sabi ::= number_level_1 PLUS number_sabi_sabi
+						| number_level_1 MINUS number_sabi_sabi
+						| number_level_1
+						| number_increment;
+number_level_1 ::= number_level_2 TIMES number_level_1
+					| number_level_2 DIVIDE number_level_1
+					| number_level_2 MODULO number_level_1
+					| number_level_2;
+number_sabi_sabi ::= LEFT_PAREN number_level_2 RIGHT_PAREN
+						| int_literal
+						| float_literal
+						| sabi_sabi_end;
+number_increment ::= number_level_2 PLUS PLUS
+						number_level_2 MINUS MINUS;
+boolean_sabi_sabi ::= number_sabi_sabi compare number_sabi_sabi
+						| string_sabi_sabi EQUAL_EQUAL string_sabi_sabi
+						| string_sabi_sabi NOT_EQUAL string_sabi_sabi
+						| boolean_level_1 EQUAL_EQUAL boolean_sabi_sabi
+						| boolean_level_1 NOT_EQUAL boolean_sabi_sabi
+						| boolean_level_1;
+boolean_level_1 ::= boolean_level_2 OR boolean_level_1
+					| boolean_level_2;
+boolean_level_2 ::= boolean_level_3 AND boolean_level_2
+					| boolean_level_3;
+boolean_level_3 ::= LEFT_PAREN boolean_level_3 RIGHT_PAREN
+					| NOT boolean_level_3
+					| sabi_sabi_end;
+compare ::= EQUAL_EQUAL
+			| GT_EQUAL
+			| LT_EQUAL
+			| GREATER_THAN
+			| LESS_THAN
+			| NOT_EQUAL;
+string_sabi_sabi ::= string_literal PLUS string_sabi_sabi
+						| valid_var PLUS string_sabi_sabi
+						| utos_makeTawag PLUS string_sabi_sabi
+						| utos_makeBasa PLUS string_sabi_sabi
+						| char_literal PLUS string_sabi_sabi
+						| sabi_sabi_end
+						| string_literal
+						| char_literal;
+
+/*MISCELLANEOUS RELATIONS*/
+int_literal ::= sign numbers_plus
 ;
-bool ::= YUHH
+float_literal ::= FLOAT
+;
+char_literal ::= CHARACTER
+;
+string_literal ::= STRING
+;
+bool_literal ::= YUHH
 		| NUHH
 ;
 void_name ::= POOR;
-null ::= WALEY;
+null_name ::= WALEY;
 
-/*MISCELLANEOUS RELATIONS*/
-
-/*ALPHANUMERIC, etc.*/
 valid_name ::= letter:l validvar_cont:vvc {: RESULT = Character.toString(l) + vvc; :}
 			| underscore:u validvar_cont:vvc {: RESULT = Character.toString(u) + vvc; :}
 ;
