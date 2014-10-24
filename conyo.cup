@@ -80,6 +80,9 @@ non terminal			utos_block;
 non terminal			utos_block_opt;
 non terminal			block_content;
 non terminal			utos_dec;
+non terminal			utos_dec_nodb;
+non terminal			utos_dec_db;
+non terminal			utos_dec_val;
 non terminal			utos_makeKuha;
 non terminal			utos_makeTawag;
 non terminal			utos_makeSulat;
@@ -162,7 +165,7 @@ array_dt ::= primitive_dt brackets
 			| valid_name brackets;
 			
 valid_name ::= IDENTIFIER
-			| IDENTIFIER COLON valid_name;
+			| valid_name COLON IDENTIFIER;
 valid_var ::= valid_name
 			| valid_name ref_brackets;
 			
@@ -216,17 +219,20 @@ utos_block ::= DOLLAR_SIGN utos_block_opt DOLLAR_SIGN;
 utos_block_opt ::= block_content | ;
 block_content ::= utos_dec block_content
 				| utos_dec;
-utos_dec ::= utos_makeKuha DB
-			| utos_makeTawag DB
-			| utos_makeSulat DB
-			| utos_makeBasa DB
-			| utos_likeKapag
+utos_dec ::= utos_dec_db DB
+			| utos_dec_val DB
+			| utos_dec_nodb;
+utos_dec_nodb ::= utos_likeKapag
 			| utos_makePalit
 			| utos_likeHabang
 			| utos_makeGawaHabang
-			| utos_makeUlit
-			| BREAKUP DB
-			| MAKEUP DB;
+			| utos_makeUlit;
+utos_dec_db ::= utos_makeKuha
+			| utos_makeSulat
+			| BREAKUP
+			| MAKEUP;
+utos_dec_val ::= utos_makeTawag
+			| utos_makeBasa;
 utos_makeKuha ::= valid_var arte_assign
 				| sabi_sabi;
 utos_makeTawag ::= MAKE_TAWAG valid_name LEFT_PAREN arte_init_list RIGHT_PAREN;
@@ -243,14 +249,12 @@ makePalit_MRW ::= MRW sabi_sabi COLON utos_block_opt makePalit_MRW
 utos_likeHabang ::= LIKE_HABANG LEFT_PAREN sabi_sabi RIGHT_PAREN utos_block
 				| LIKE_HABANG LEFT_PAREN sabi_sabi RIGHT_PAREN DB;
 utos_makeGawaHabang ::= MAKE_GAWA utos_block LIKE_HABANG LEFT_PAREN sabi_sabi RIGHT_PAREN DB;
-utos_makeUlit ::= MAKE_ULIT LEFT_PAREN utos_makeKuha DB sabi_sabi DB utos_makeKuha RIGHT_PAREN utos_block
-			| MAKE_ULIT LEFT_PAREN valid_var DB sabi_sabi DB utos_makeKuha RIGHT_PAREN utos_block;
+utos_makeUlit ::= MAKE_ULIT LEFT_PAREN utos_makeKuha DB sabi_sabi DB utos_makeKuha RIGHT_PAREN utos_block;
 
 /*Expression Productions*/
 
 sabi_sabi_end ::= valid_var
-				| utos_makeTawag
-				| utos_makeBasa
+				| utos_dec_val
 				| literal;
 	
 sabi_sabi ::= ss_OR;
