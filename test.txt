@@ -1,9 +1,7 @@
-makeLagay asdf.cnyo db
-
-OMG asdf makeKuha 23 db
+OMG jkl makeKuha 100 db
 
 superYaya
 $
+	makeArte inty asdf db
 	makeArte inty jkl db
 $
-makeTapos

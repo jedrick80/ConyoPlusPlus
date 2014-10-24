@@ -96,6 +96,7 @@ non terminal			makePalit_MRW;
 non terminal			utos_likeHabang;
 non terminal			utos_makeGawaHabang;
 non terminal			utos_makeUlit;
+non terminal			utos_makeArte;
 /*Expression Relations*/
 non terminal			sabi_sabi_end;
 non terminal			sabi_sabi;
@@ -131,7 +132,7 @@ start with conyogram;
 /*Program*/
 
 conyogram ::= OMG_section yaya_section sub_yaya_section super_yaya
-				{: printText(); :}
+				{: System.out.println("asdf"); printText(); :}
 ;
 
 /*Program Breakdown*/
@@ -140,7 +141,7 @@ OMG_section ::= OMG_list | ;
 OMG_list ::= OMG_dec
 			| OMG_dec OMG_list;
 OMG_dec ::= OMG IDENTIFIER:id MAKE_KUHA sabi_sabi DB
-			{: addText("ADDED NEW CONSTANT " + id + "."); :}
+			{: addText("ADDED NEW CONSTANT: " + id + "."); :}
 ;
 
 yaya_section ::= yaya_list | ;
@@ -194,9 +195,12 @@ sy_init ::= BRAND_NEW reference_dt LEFT_PAREN arte_init_list RIGHT_PAREN;
 
 /*Variable Declaration Productions*/
 
-arte_dec ::= MAKE_ARTE data_type IDENTIFIER arte_assign DB;
+arte_dec ::= MAKE_ARTE data_type IDENTIFIER:id arte_assign DB
+			{: addText("ADDED NEW VARIABLE: " + id + "."); :}
+;
 arte_assign ::= MAKE_KUHA arte_init
-			| sabi_sabi_makeKuha;
+			| sabi_sabi_makeKuha
+			| ;
 arte_init ::= array_init
 			| sy_init;
 
@@ -236,7 +240,8 @@ utos_dec_nodb ::= utos_likeKapag
 			| utos_makePalit
 			| utos_likeHabang
 			| utos_makeGawaHabang
-			| utos_makeUlit;
+			| utos_makeUlit
+			| utos_makeArte;
 utos_dec_db ::= utos_makeKuha
 			| utos_makeSulat
 			| BREAKUP
@@ -259,6 +264,7 @@ utos_likeHabang ::= LIKE_HABANG sabi_sabi utos_block
 				| LIKE_HABANG sabi_sabi DB;
 utos_makeGawaHabang ::= MAKE_GAWA utos_block LIKE_HABANG sabi_sabi DB;
 utos_makeUlit ::= MAKE_ULIT LEFT_PAREN utos_makeKuha sabi_sabi_for utos_makeKuha RIGHT_PAREN utos_block;
+utos_makeArte ::= arte_dec;
 
 /*Expression Productions*/
 
@@ -270,7 +276,7 @@ sabi_sabi_for ::= DB ss_OR DB;
 sabi_sabi_switch ::= MRW ss_OR;
 sabi_sabi_makeKuha ::= MAKE_KUHA ss_OR;	
 sabi_sabi_brace ::= LEFT_BRACE ss_OR RIGHT_BRACE;	
-sabi_sabi ::= LEFT_PAREN ss_OR RIGHT_PAREN;
+sabi_sabi ::= ss_OR;
 ss_OR ::= ss_AND OR OR ss_OR
 		| ss_AND;
 ss_AND ::= ss_equality AND AND ss_AND

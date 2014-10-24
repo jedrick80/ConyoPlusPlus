@@ -1,80 +1,87 @@
-line: 1 col: 1 match: --makeLagay--
-action [57] { return symbol(sym.MAKE_LAGAY); }
-line: 1 col: 10 match: -- --
+line: 1 col: 1 match: --OMG--
+action [57] { return symbol(sym.OMG); }
+#2
+line: 1 col: 4 match: -- --
 action [141] { /*blank*/ }
-line: 1 col: 11 match: --asdf--
+line: 1 col: 5 match: --jkl--
 action [127] { return symbol(sym.IDENTIFIER, yytext()); }
-line: 1 col: 15 match: --.--
-action [107] { return symbol(sym.PERIOD); }
-line: 1 col: 16 match: --cnyo--
-action [93] { return symbol(sym.CNYO); }
-line: 1 col: 20 match: -- --
+#59
+line: 1 col: 8 match: -- --
 action [141] { /*blank*/ }
-line: 1 col: 21 match: --db--
-action [92] { return symbol(sym.DB); }
-line: 1 col: 23 match: --\u000D\u000A--
+line: 1 col: 9 match: --makeKuha--
+action [88] { return symbol(sym.MAKE_KUHA); }
+#30
+line: 1 col: 17 match: -- --
+action [141] { /*blank*/ }
+line: 1 col: 18 match: --100--
+action [125] { return symbol(sym.INT_LITERAL, Integer.parseInt(yytext())); }
+#63
+line: 1 col: 21 match: -- --
+action [141] { /*blank*/ }
+line: 1 col: 22 match: --db--
+action [90] { return symbol(sym.DB); }
+#32
+line: 1 col: 24 match: --\u000D\u000A--
 action [141] { /*blank*/ }
 line: 2 col: 1 match: --\u000D\u000A--
 action [141] { /*blank*/ }
-line: 3 col: 1 match: --OMG--
-action [58] { return symbol(sym.OMG); }
-line: 3 col: 4 match: -- --
+line: 3 col: 1 match: --superYaya--
+action [61] { return symbol(sym.SUPER_YAYA); }
+#6
+line: 3 col: 10 match: --\u000D\u000A--
 action [141] { /*blank*/ }
-line: 3 col: 5 match: --asdf--
+line: 4 col: 1 match: --$--
+action [97] { return symbol(sym.DOLLAR_SIGN); }
+#35
+line: 4 col: 2 match: --\u000D\u000A--
+action [141] { /*blank*/ }
+line: 5 col: 1 match: --\u0009--
+action [141] { /*blank*/ }
+line: 5 col: 2 match: --makeArte--
+action [62] { return symbol(sym.MAKE_ARTE); }
+#7
+line: 5 col: 10 match: -- --
+action [141] { /*blank*/ }
+line: 5 col: 11 match: --inty--
+action [79] { return symbol(sym.INTY, yytext()); }
+#24
+line: 5 col: 15 match: -- --
+action [141] { /*blank*/ }
+line: 5 col: 16 match: --asdf--
 action [127] { return symbol(sym.IDENTIFIER, yytext()); }
-line: 3 col: 9 match: -- --
+#59
+line: 5 col: 20 match: -- --
 action [141] { /*blank*/ }
-line: 3 col: 10 match: --makeKuha--
-action [90] { return symbol(sym.MAKE_KUHA); }
-line: 3 col: 18 match: -- --
+line: 5 col: 21 match: --db--
+action [90] { return symbol(sym.DB); }
+#32
+line: 5 col: 23 match: --\u000D\u000A--
 action [141] { /*blank*/ }
-line: 3 col: 19 match: --23--
-action [125] { return symbol(sym.INTEGER, Integer.parseInt(yytext())); }
-line: 3 col: 21 match: -- --
+line: 6 col: 1 match: --\u0009--
 action [141] { /*blank*/ }
-line: 3 col: 22 match: --db--
-action [92] { return symbol(sym.DB); }
-line: 3 col: 24 match: --\u000D\u000A--
+line: 6 col: 2 match: --makeArte--
+action [62] { return symbol(sym.MAKE_ARTE); }
+#7
+line: 6 col: 10 match: -- --
 action [141] { /*blank*/ }
-line: 4 col: 1 match: --\u000D\u000A--
+line: 6 col: 11 match: --inty--
+action [79] { return symbol(sym.INTY, yytext()); }
+#24
+line: 6 col: 15 match: -- --
 action [141] { /*blank*/ }
-line: 5 col: 1 match: --superYaya--
-action [63] { return symbol(sym.SUPER_YAYA); }
-line: 5 col: 10 match: --\u000D\u000A--
-action [141] { /*blank*/ }
-line: 6 col: 1 match: --$--
-action [100] { return symbol(sym.DOLLAR_SIGN); }
-line: 6 col: 2 match: --\u000D\u000A--
-action [141] { /*blank*/ }
-line: 7 col: 1 match: --\u0009--
-action [141] { /*blank*/ }
-line: 7 col: 2 match: --makeArte--
-action [64] { return symbol(sym.MAKE_ARTE); }
-line: 7 col: 10 match: -- --
-action [141] { /*blank*/ }
-line: 7 col: 11 match: --inty--
-action [81] { return symbol(sym.INTY); }
-line: 7 col: 15 match: -- --
-action [141] { /*blank*/ }
-line: 7 col: 16 match: --jkl--
+line: 6 col: 16 match: --jkl--
 action [127] { return symbol(sym.IDENTIFIER, yytext()); }
-line: 7 col: 19 match: -- --
+#59
+line: 6 col: 19 match: -- --
 action [141] { /*blank*/ }
-line: 7 col: 20 match: --db--
-action [92] { return symbol(sym.DB); }
-line: 7 col: 22 match: --\u000D\u000A--
+line: 6 col: 20 match: --db--
+action [90] { return symbol(sym.DB); }
+#32
+line: 6 col: 22 match: --\u000D\u000A--
 action [141] { /*blank*/ }
-line: 8 col: 1 match: --$--
-action [100] { return symbol(sym.DOLLAR_SIGN); }
-line: 8 col: 2 match: --\u000D\u000A--
-action [141] { /*blank*/ }
-line: 9 col: 1 match: --makeTapos--
-action [62] { return symbol(sym.MAKE_TAPOS); }
-line: 9 col: 10 match: <<EOF>>
+line: 7 col: 1 match: --$--
+action [97] { return symbol(sym.DOLLAR_SIGN); }
+#35
+line: 7 col: 2 match: <<EOF>>
 action [143] { return symbol(sym.EOF); }
-INCLUDED A NEW FILE: asdf
-ADDED NEW CONSTANT asdf OF TYPE null.
-NEW VARIABLE NAMED jkl OF TYPE null DECLARED.
-MAIN FUNCTION FOUND.
-line: 9 col: 10 match: <<EOF>>
-action [143] { return symbol(sym.EOF); }
+#0
