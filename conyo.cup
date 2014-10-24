@@ -17,11 +17,11 @@ terminal            MAKE_LAGAY, OMG, HIRE_YAYA, BAYAD, MAKE_BALIK, MAKE_TAPOS;
 terminal			SUPER_YAYA, MAKE_ARTE, BRAND_NEW, MAKE_UTUSAN, BREAKUP, MAKEUP;
 terminal			MAKE_TAWAG, MAKE_SULAT, MAKE_BASA, LIKE_KAPAG, THIS_NALANG, THIS_NALANG_KAPAG;
 terminal			MAKE_PALIT, MRW, MDR, LIKE_HABANG, MAKE_GAWA, MAKE_ULIT, INTY, FLOATY, CHARY;
-terminal			STRINGY, BOOLY, YUHH, NUHH, POOR, WALEY, MAKE_KUHA, DB;
+terminal			STRINGY, BOOLY, YUHH, NUHH, POOR, WALEY, MAKE_KUHA, MAKE_SIMULA, DB;
 terminal			COMMA, COLON, DOLLAR_SIGN, LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE;
 terminal			LEFT_CURLY, RIGHT_CURLY, PERIOD, PLUS, MINUS, TIMES, DIVIDE, MODULO;
 terminal			NOT_EQUAL, LESS_THAN, LT_EQUAL, GREATER_THAN, GT_EQUAL, EQUAL_EQUAL, AND, OR;
-terminal			CNYO;
+terminal			CNYO, IDENTIFIER;
 terminal String		STRING;
 terminal Character 	CHARACTER;
 terminal Character	LETTER;
@@ -74,16 +74,16 @@ conyogram ::= lagay_list OMG_list yaya_list sub_yaya_list super_yaya
 /*INCLUDE LIBRARIES AND FILES (LAGAY LIST)*/
 lagay_list ::= lagay_statement lagay_list | 
 ;
-lagay_statement ::= MAKE_LAGAY letter_number_plus:lnp PERIOD file_type endOfLine
-					{: addText("INCLUDED A NEW FILE!!!!: " + lnp); :}
+lagay_statement ::= MAKE_LAGAY IDENTIFIER:id PERIOD file_type endOfLine
+					{: addText("INCLUDED A NEW FILE: " + id); :}
 ;
 file_type ::= CNYO;
 
 /*CONSTANT DECLARATION (OMG LIST)*/
 OMG_list ::= OMG_statement OMG_list | 
 ;
-OMG_statement ::= OMG valid_name gets all_data_types endOfLine
-					{: addText("ADDED NEW CONSTANT!!!"); :}
+OMG_statement ::= OMG IDENTIFIER:id gets all_data_types:dt endOfLine
+					{: addText("ADDED NEW CONSTANT " + id + " OF TYPE " + dt + "."); :}
 ;
 
 /*FUNCTION DECLARATION (YAYA LIST)*/
@@ -108,8 +108,8 @@ arte_list ::= arte_dec |
 ;
 arte_dec ::= arte arte_dec 
 			| arte;
-arte ::= MAKE_ARTE all_type_names:tn valid_name:vn arte_init endOfLine 
-			{: addText("NEW VARIABLE NAMED " + vn + " OF TYPE " + tn + " DECLARED."); :}
+arte ::= MAKE_ARTE all_type_names:tn IDENTIFIER:id arte_init endOfLine 
+			{: addText("NEW VARIABLE NAMED " + id + " OF TYPE " + tn + " DECLARED."); :}
 ;
 array_brackets ::= LEFT_BRACE numbers_plus RIGHT_BRACE 
 					/*| LEFT_BRACE valid_var RIGHT_BRACE*/;
