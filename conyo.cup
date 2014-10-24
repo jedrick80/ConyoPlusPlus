@@ -13,7 +13,7 @@ parser code {:
 :};
 
 /* Terminals */
-terminal            MAKE_LAGAY, OMG, HIRE_YAYA, BAYAD, MAKE_BALIK, MAKE_TAPOS;
+terminal            OMG, HIRE_YAYA, BAYAD, MAKE_BALIK;
 terminal			SUPER_YAYA, MAKE_ARTE, BRAND_NEW, MAKE_UTUSAN, BREAKUP, MAKEUP;
 terminal			MAKE_TAWAG, MAKE_SULAT, MAKE_BASA, LIKE_KAPAG, THIS_NALANG, THIS_NALANG_KAPAG;
 terminal			MAKE_PALIT, MRW, MDR, LIKE_HABANG, MAKE_GAWA, MAKE_ULIT;
@@ -23,16 +23,13 @@ terminal			COMMA, COLON, DOLLAR_SIGN, LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT
 terminal			LEFT_CURLY, RIGHT_CURLY; 
 terminal			PERIOD, PLUS, MINUS, TIMES, DIVIDE, MODULO;
 terminal			NOT_EQUAL, LESS_THAN, LT_EQUAL, GREATER_THAN, GT_EQUAL, EQUAL_EQUAL, AND, OR, NOT;
-terminal String		CNYO;
 terminal String		IDENTIFIER;
 terminal String		STRING_LITERAL;
 terminal Character 	CHAR_LITERAL;
-terminal Character	LETTER;
 terminal Float		FLOAT_LITERAL;			
 terminal Integer    INT_LITERAL;
 terminal String		BOOL_LITERAL;
 terminal String		WALEY;
-terminal Character	UNDERSCORE;
 
 /* Non terminals */
 /*Program*/
