@@ -23,6 +23,7 @@ terminal			COMMA, COLON, DOLLAR_SIGN, LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT
 terminal			LEFT_CURLY, RIGHT_CURLY; 
 terminal			PERIOD, PLUS, MINUS, TIMES, DIVIDE, MODULO;
 terminal			NOT_EQUAL, LESS_THAN, LT_EQUAL, GREATER_THAN, GT_EQUAL, EQUAL_EQUAL, AND, OR, NOT;
+terminal 			POS_INC, NEG_INC;
 terminal String		IDENTIFIER;
 terminal String		STRING_LITERAL;
 terminal Character 	CHAR_LITERAL;
@@ -269,8 +270,8 @@ ss_unary_1 ::= NOT ss_unary_1
 			| PLUS PLUS ss_unary_1
 			| MINUS MINUS ss_unary_1
 			| ss_unary_2;
-ss_unary_2 ::= ss_unary_2 PLUS PLUS
-			| ss_unary_2 MINUS MINUS
+ss_unary_2 ::= ss_unary_2 POS_INC
+			| ss_unary_2 NEG_INC
 			| ss_paren;
 ss_paren ::= LEFT_PAREN ss_paren RIGHT_PAREN
 			| sabi_sabi_end;
