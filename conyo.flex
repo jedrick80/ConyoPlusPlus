@@ -15,7 +15,6 @@ import java_cup.runtime.*;
 %line
 %column
 %cup
-%debug
 
 %{
 	StringBuffer string = new StringBuffer();

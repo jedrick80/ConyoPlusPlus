@@ -18,7 +18,9 @@ class MainConyo
   public static void main(String argv[]) {
 		for (int i = 0; i < argv.length; i++) {
 		  try {
-			ConyoLexer s = new ConyoLexer(new FileReader(argv[i]));
+			java.io.FileInputStream stream = new java.io.FileInputStream(argv[i]);
+			java.io.Reader reader = new java.io.InputStreamReader(stream, "UTF-8");
+			ConyoLexer s = new ConyoLexer(reader);
 			Parser p = new Parser(s);
 			p.parse();
 		  }
