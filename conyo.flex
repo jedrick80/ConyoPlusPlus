@@ -76,6 +76,7 @@ float = {integer}\.{integer}(e{integer})?
 <YYINITIAL> "likeHabang" {return symbol(sym.LIKE_HABANG);}
 <YYINITIAL> "makeGawa" {return symbol(sym.MAKE_GAWA);}
 <YYINITIAL> "makeUlit" {return symbol(sym.MAKE_ULIT);}
+<YYINITIAL> "makeSabi" {return symbol(sym.MAKE_SABI);}
 <YYINITIAL> "inty" {return symbol(sym.INTY, yytext());}
 <YYINITIAL> "floaty" {return symbol(sym.FLOATY, yytext());}
 <YYINITIAL> "chary" {return symbol(sym.CHARY, yytext());}
