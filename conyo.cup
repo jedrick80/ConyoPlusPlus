@@ -4,11 +4,12 @@ parser code {:
 	StringBuilder sb = new StringBuilder();
 	public void addText(String text)
 	{
-		sb.append(text + "\n");
+		sb.append(text);
+		sb.append("\t\n");
 	}
 	public void printText()
 	{
-		System.out.print(sb);
+		System.out.println(sb);
 	}
 :};
 
@@ -17,7 +18,7 @@ terminal            OMG, HIRE_YAYA, BAYAD, MAKE_BALIK;
 terminal			SUPER_YAYA, MAKE_ARTE, BRAND_NEW, MAKE_UTUSAN, BREAKUP, MAKEUP;
 terminal			MAKE_TAWAG, MAKE_SULAT, MAKE_BASA, LIKE_KAPAG, THIS_NALANG, THIS_NALANG_KAPAG;
 terminal			MAKE_PALIT, MRW, MDR, LIKE_HABANG, MAKE_GAWA, MAKE_ULIT;
-terminal			INTY, FLOATY, CHARY, STRINGY, BOOLY, POOR;
+terminal String		INTY, FLOATY, CHARY, STRINGY, BOOLY, POOR;
 terminal			MAKE_KUHA, MAKE_SIMULA, MAKE_SABI, DB;
 terminal			COMMA, COLON, DOLLAR_SIGN, LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE;
 terminal			LEFT_CURLY, RIGHT_CURLY; 
@@ -48,7 +49,7 @@ non terminal			sub_yaya_list;
 non terminal			super_yaya;
 /*Literals, Data Types, Names*/
 non terminal			literal;
-non terminal			data_type;
+non terminal String		data_type;
 non terminal			primitive_dt;
 non terminal			reference_dt;
 non terminal			array_dt;
@@ -131,7 +132,7 @@ start with conyogram;
 /*Program*/
 
 conyogram ::= OMG_section yaya_section sub_yaya_section super_yaya
-				{: printText(); :}
+				{: System.out.println("PROGRAM PARSED.\n"); printText(); :}
 ;
 
 /*Program Breakdown*/
@@ -151,7 +152,8 @@ sub_yaya_section ::= sub_yaya_list | ;
 sub_yaya_list ::= sub_yaya
 				| sub_yaya sub_yaya_list;
 				
-super_yaya ::= SUPER_YAYA utos_block;
+super_yaya ::= SUPER_YAYA utos_block
+				{: addText("MAIN FUNCTION FOUND!"); :};
 
 /*Literals, Data Types, Names*/
 
@@ -181,7 +183,8 @@ valid_var ::= valid_name %prec SHORT_NAME
 			
 /*Class Declaration Productions*/
 
-sub_yaya ::= MAKE_UTUSAN IDENTIFIER sy_body;
+sub_yaya ::= MAKE_UTUSAN IDENTIFIER:id sy_body
+			{: addText("CREATED NEW CLASS: " + id + "."); :};
 sy_body ::= DOLLAR_SIGN sy_opt DOLLAR_SIGN;
 sy_opt ::= sy_cont_list | ;
 sy_cont_list ::= sy_cont sy_cont_list
@@ -194,7 +197,8 @@ sy_init ::= BRAND_NEW reference_dt LEFT_PAREN arte_init_list RIGHT_PAREN;
 
 /*Variable Declaration Productions*/
 
-arte_dec ::= MAKE_ARTE data_type IDENTIFIER arte_assign DB;
+arte_dec ::= MAKE_ARTE data_type IDENTIFIER:id arte_assign DB
+		{: addText("DECLARED NEW VARIABLE: " + id + "."); :};
 arte_assign ::= MAKE_KUHA arte_init
 			| ;
 arte_init ::= array_init
@@ -205,8 +209,10 @@ arte_init ::= array_init
 
 yaya ::= yaya_header utos_block;
 
-yaya_header ::= HIRE_YAYA IDENTIFIER BAYAD LEFT_PAREN yaya_param_sec RIGHT_PAREN MAKE_BALIK data_type IDENTIFIER
-			| HIRE_YAYA IDENTIFIER BAYAD LEFT_PAREN yaya_param_sec RIGHT_PAREN MAKE_BALIK POOR;
+yaya_header ::= HIRE_YAYA IDENTIFIER:id BAYAD LEFT_PAREN yaya_param_sec RIGHT_PAREN MAKE_BALIK data_type IDENTIFIER
+				{: addText("CREATED NEW FUNCTION: " + id + "."); :}
+			| HIRE_YAYA IDENTIFIER:id BAYAD LEFT_PAREN yaya_param_sec RIGHT_PAREN MAKE_BALIK POOR
+				{: addText("CREATED NEW FUNCTION: " + id + "."); :};
 
 yaya_param_sec ::= yaya_param_list | ;
 yaya_param_list ::= yaya_param COMMA yaya_param_list
@@ -234,19 +240,19 @@ block_content ::= utos_dec block_content
 utos_dec ::= utos_dec_db DB
 			| utos_dec_val DB
 			| utos_dec_nodb;
-utos_dec_nodb ::= utos_likeKapag
-			| utos_makePalit
-			| utos_likeHabang
-			| utos_makeGawaHabang
-			| utos_makeUlit
+utos_dec_nodb ::= utos_likeKapag {: addText("IF STATEMENT FOUND!"); :}
+			| utos_makePalit {: addText("SWITCH STATEMENT FOUND!"); :}
+			| utos_likeHabang {: addText("WHILE LOOP FOUND!"); :}
+			| utos_makeGawaHabang {: addText("DO WHILE LOOP FOUND!"); :}
+			| utos_makeUlit {: addText("FOR LOOP FOUND!"); :}
 			| utos_makeArte;
-utos_dec_db ::= utos_makeKuha
-			| utos_makeSulat
-			| utos_makeSabi
-			| BREAKUP
-			| MAKEUP;
-utos_dec_val ::= utos_makeTawag
-			| utos_makeBasa;
+utos_dec_db ::= utos_makeKuha {: addText("ASSIGNMENT STATEMENT FOUND!"); :}
+			| utos_makeSulat {: addText("OUTPUT FUNCTION FOUND!"); :}
+			| utos_makeSabi {: addText("STANDALONE EXPRESSION FOUND!"); :}
+			| BREAKUP {: addText("BREAK FOUND!"); :}
+			| MAKEUP {: addText("CONTINUE FOUND!"); :};
+utos_dec_val ::= utos_makeTawag {: addText("FUNCTION CALL FOUND!"); :}
+			| utos_makeBasa {: addText("INPUT FUNCTION FOUND!"); :};
 utos_makeKuha ::= valid_var arte_assign;
 utos_makeTawag ::= MAKE_TAWAG valid_name LEFT_PAREN arte_init_list RIGHT_PAREN;
 utos_makeSulat ::= MAKE_SULAT LEFT_PAREN sabi_sabi RIGHT_PAREN;
