@@ -1,9 +1,81 @@
-makeLagay asdf.cnyo db
+OMG PI makeKuha 3.14 db 
 
-OMG asdf makeKuha 23 db
+hireYaya printAllExceptAlpha bayad (stringy[] names) makeBalik poor
+$
+	makeArte inty i db
 
+	makeUlit(i makeKuha 0 db i <= makeTawag names:length() db i++ db)
+	$
+		likeKapag(i == "Alpha")
+		$
+			makeSulat("Alpha spotted") db
+			makeup db
+		$
+
+		makeSulat(names[i]) db
+	$	
+$ 
+
+hireYaya search bayad (stringy[] list, stringy key) makeBalik inty[] indices
+$
+	makeArte inty i makeKuha makeTawag list:length() db
+
+	likeHabang(i <> 0)
+	$
+		likeKapag(list[i] == key)	
+		$
+			makeTawag indices:add(i) db
+		$
+
+		makeSabi i-- db
+	$
+$
+
+hireYaya createNames bayad (inty x) makeBalik stringy[] names
+$
+	makePalit(x)
+	$
+		MRW 1:	names makeKuha {"Alpha", "Beta"} db
+				breakup db
+		MRW 2:	names makeKuha {"Charlie", "Delta"} db
+				breakup db
+		MDR:	names makeKuha {"Echo", "Foxtrot"} db
+	$
+$
+ 
+hireYaya adderFunction bayad (inty x, inty y) makeBalik inty z
+$
+ 	z makeKuha x + y db
+$
+ 
+hireYaya printSomething bayad () makeBalik poor
+$
+ 	makeSulat("Hello, World.") db
+$
+ 
 superYaya
 $
-	makeArte inty jkl db
+ 	makeArte inty sum db
+  	sum makeKuha makeTawag adderFunction(1, 2) db
+ 	makeSulat(sum) db
+ 	makeTawag printSomething() db
+	makeTawag printAllExceptAlpha (makeTawag createNames(1)) db
+	makeSulat("Index(es) of Echo: " + makeTawag search(makeTawag 
+    createNames(3), "Echo")) db
+	sum makeKuha makeBasa(inty) + makeBasa(inty) db
+	makeUlit(sum db sum < 1 db sum-- db)
+	$
+		likeKapag(sum > 10)
+		$
+				makeSulat("conyo forever") db
+		$
+		thisNalangKapag(sum < 10 && sum > 5)
+		$
+				makeSulat("conyo 4lyf") db
+		$
+		thisNalang 
+		$
+				makeSulat("conyo sucks") db
+		$
+	$
 $
-makeTapos

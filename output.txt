@@ -1,80 +1,49 @@
-line: 1 col: 1 match: --makeLagay--
-action [57] { return symbol(sym.MAKE_LAGAY); }
-line: 1 col: 10 match: -- --
-action [141] { /*blank*/ }
-line: 1 col: 11 match: --asdf--
-action [127] { return symbol(sym.IDENTIFIER, yytext()); }
-line: 1 col: 15 match: --.--
-action [107] { return symbol(sym.PERIOD); }
-line: 1 col: 16 match: --cnyo--
-action [93] { return symbol(sym.CNYO); }
-line: 1 col: 20 match: -- --
-action [141] { /*blank*/ }
-line: 1 col: 21 match: --db--
-action [92] { return symbol(sym.DB); }
-line: 1 col: 23 match: --\u000D\u000A--
-action [141] { /*blank*/ }
-line: 2 col: 1 match: --\u000D\u000A--
-action [141] { /*blank*/ }
-line: 3 col: 1 match: --OMG--
-action [58] { return symbol(sym.OMG); }
-line: 3 col: 4 match: -- --
-action [141] { /*blank*/ }
-line: 3 col: 5 match: --asdf--
-action [127] { return symbol(sym.IDENTIFIER, yytext()); }
-line: 3 col: 9 match: -- --
-action [141] { /*blank*/ }
-line: 3 col: 10 match: --makeKuha--
-action [90] { return symbol(sym.MAKE_KUHA); }
-line: 3 col: 18 match: -- --
-action [141] { /*blank*/ }
-line: 3 col: 19 match: --23--
-action [125] { return symbol(sym.INTEGER, Integer.parseInt(yytext())); }
-line: 3 col: 21 match: -- --
-action [141] { /*blank*/ }
-line: 3 col: 22 match: --db--
-action [92] { return symbol(sym.DB); }
-line: 3 col: 24 match: --\u000D\u000A--
-action [141] { /*blank*/ }
-line: 4 col: 1 match: --\u000D\u000A--
-action [141] { /*blank*/ }
-line: 5 col: 1 match: --superYaya--
-action [63] { return symbol(sym.SUPER_YAYA); }
-line: 5 col: 10 match: --\u000D\u000A--
-action [141] { /*blank*/ }
-line: 6 col: 1 match: --$--
-action [100] { return symbol(sym.DOLLAR_SIGN); }
-line: 6 col: 2 match: --\u000D\u000A--
-action [141] { /*blank*/ }
-line: 7 col: 1 match: --\u0009--
-action [141] { /*blank*/ }
-line: 7 col: 2 match: --makeArte--
-action [64] { return symbol(sym.MAKE_ARTE); }
-line: 7 col: 10 match: -- --
-action [141] { /*blank*/ }
-line: 7 col: 11 match: --inty--
-action [81] { return symbol(sym.INTY); }
-line: 7 col: 15 match: -- --
-action [141] { /*blank*/ }
-line: 7 col: 16 match: --jkl--
-action [127] { return symbol(sym.IDENTIFIER, yytext()); }
-line: 7 col: 19 match: -- --
-action [141] { /*blank*/ }
-line: 7 col: 20 match: --db--
-action [92] { return symbol(sym.DB); }
-line: 7 col: 22 match: --\u000D\u000A--
-action [141] { /*blank*/ }
-line: 8 col: 1 match: --$--
-action [100] { return symbol(sym.DOLLAR_SIGN); }
-line: 8 col: 2 match: --\u000D\u000A--
-action [141] { /*blank*/ }
-line: 9 col: 1 match: --makeTapos--
-action [62] { return symbol(sym.MAKE_TAPOS); }
-line: 9 col: 10 match: <<EOF>>
-action [143] { return symbol(sym.EOF); }
-INCLUDED A NEW FILE: asdf
-ADDED NEW CONSTANT asdf OF TYPE null.
-NEW VARIABLE NAMED jkl OF TYPE null DECLARED.
-MAIN FUNCTION FOUND.
-line: 9 col: 10 match: <<EOF>>
-action [143] { return symbol(sym.EOF); }
+PROGRAM PARSED.
+
+ADDED NEW CONSTANT PI.	
+CREATED NEW FUNCTION: printAllExceptAlpha.	
+DECLARED NEW VARIABLE: i.	
+FUNCTION CALL FOUND!	
+OUTPUT FUNCTION FOUND!	
+CONTINUE FOUND!	
+IF STATEMENT FOUND!	
+OUTPUT FUNCTION FOUND!	
+FOR LOOP FOUND!	
+CREATED NEW FUNCTION: search.	
+FUNCTION CALL FOUND!	
+DECLARED NEW VARIABLE: i.	
+FUNCTION CALL FOUND!	
+IF STATEMENT FOUND!	
+STANDALONE EXPRESSION FOUND!	
+WHILE LOOP FOUND!	
+CREATED NEW FUNCTION: createNames.	
+ASSIGNMENT STATEMENT FOUND!	
+BREAK FOUND!	
+ASSIGNMENT STATEMENT FOUND!	
+BREAK FOUND!	
+ASSIGNMENT STATEMENT FOUND!	
+SWITCH STATEMENT FOUND!	
+CREATED NEW FUNCTION: adderFunction.	
+ASSIGNMENT STATEMENT FOUND!	
+CREATED NEW FUNCTION: printSomething.	
+OUTPUT FUNCTION FOUND!	
+DECLARED NEW VARIABLE: sum.	
+FUNCTION CALL FOUND!	
+ASSIGNMENT STATEMENT FOUND!	
+OUTPUT FUNCTION FOUND!	
+FUNCTION CALL FOUND!	
+FUNCTION CALL FOUND!	
+FUNCTION CALL FOUND!	
+FUNCTION CALL FOUND!	
+FUNCTION CALL FOUND!	
+OUTPUT FUNCTION FOUND!	
+INPUT FUNCTION FOUND!	
+INPUT FUNCTION FOUND!	
+ASSIGNMENT STATEMENT FOUND!	
+OUTPUT FUNCTION FOUND!	
+OUTPUT FUNCTION FOUND!	
+OUTPUT FUNCTION FOUND!	
+IF STATEMENT FOUND!	
+FOR LOOP FOUND!	
+MAIN FUNCTION FOUND!	
+
