@@ -1,20 +1,7 @@
-makeLagay asdf.cnyo db
-
-
-
-makeLagay fdas.cnyo db
-
-makeLagay qwer.cnyo db
-
-
-
-
-makeLagay rtyu.cnyo db
-
-
-
-
-
 OMG PI makeKuha 3.14 db
 
 OMG YOwhat makeKuha 123 db
+
+superYaya
+$
+$
