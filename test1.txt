@@ -1,4 +1,10 @@
+makeLagay asdf.cnyo db
+makeLagay fdas.cnyo db
+makeLagay qwer.cnyo db
+makeLagay rtyu.cnyo db
 OMG PI makeKuha 3.14 db 
+OMG Pdas makeKuha 3.12 db
+dsadasdasdsa db
 
 hireYaya printAllExceptAlpha bayad (stringy[] names) makeBalik poor
 $
@@ -28,7 +34,6 @@ $
 		$
 
 		makeSabi i-- db
-		makeSay i++ db
 	$
 $
 
@@ -77,6 +82,8 @@ $
 		thisNalang 
 		$
 				makeSulat("conyo sucks") db
+				makeSulat db
+				makeSulat() db
 		$
 	$
 $
