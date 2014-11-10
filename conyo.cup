@@ -7,18 +7,6 @@ parser code {:
 		sb.append(text);
 		sb.append("\t\n");
 	}
-	
-	public void addText(String text, Object info)
-	{
-		sb.append(text);
-		if(info instanceof java_cup.runtime.Symbol)
-		{
-			java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
-			sb.append(" - Line " + s.left);
-		}
-		sb.append("\t\n");
-	}
-	
 	public void printText()
 	{
 		System.out.println(sb);
@@ -212,8 +200,8 @@ sy_init ::= BRAND_NEW reference_dt LEFT_PAREN arte_init_list RIGHT_PAREN;
 
 /*Variable Declaration Productions*/
 
-arte_dec ::= MAKE_ARTE:ma data_type IDENTIFIER:id arte_assign DB
-		{: addText("DECLARED NEW VARIABLE: " + id + ".", ma); :}
+arte_dec ::= MAKE_ARTE data_type IDENTIFIER:id arte_assign DB
+		{: addText("DECLARED NEW VARIABLE: " + id + "."); :}
 		| MAKE_ARTE error DB {: addText("Error in Variable Declaration"); :};
 arte_assign ::= MAKE_KUHA arte_init
 			| ;

@@ -757,18 +757,6 @@ public class Parser extends java_cup.runtime.lr_parser {
 		sb.append(text);
 		sb.append("\t\n");
 	}
-	
-	public void addText(String text, Object info)
-	{
-		sb.append(text);
-		if(info instanceof java_cup.runtime.Symbol)
-		{
-			java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
-			sb.append(" - Line " + s.left);
-		}
-		sb.append("\t\n");
-	}
-	
 	public void printText()
 	{
 		System.out.println(sb);
@@ -1264,13 +1252,10 @@ class CUP$Parser$actions {
           case 50: // arte_dec ::= MAKE_ARTE data_type IDENTIFIER arte_assign DB 
             {
               Object RESULT =null;
-		int maleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).left;
-		int maright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).right;
-		Object ma = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-4)).value;
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		 addText("DECLARED NEW VARIABLE: " + id + ".", ma); 
+		 addText("DECLARED NEW VARIABLE: " + id + "."); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("arte_dec",24, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
