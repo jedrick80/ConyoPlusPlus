@@ -1039,7 +1039,7 @@ class ConyoLexer implements java_cup.runtime.Scanner {
           }
         case 125: break;
         case 56: 
-          { return symbol(sym.MAKE_ARTE);
+          { return symbol(sym.MAKE_ARTE, sym.MAKE_ARTE);
           }
         case 126: break;
         case 57: 
