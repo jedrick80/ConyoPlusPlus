@@ -812,7 +812,10 @@ public class Parser extends java_cup.runtime.lr_parser {
 	}
 	public void printText()
 	{
-		System.out.println(sb);
+		if(sb.length() > 0)
+			System.out.println(sb);
+		else
+			System.out.println("DONE.");
 	}
 
 
@@ -858,7 +861,7 @@ class CUP$Parser$actions {
           case 1: // conyogram ::= OMG_section yaya_section sub_yaya_section super_yaya 
             {
               Object RESULT =null;
-		 System.out.println("PROGRAM PARSED.\n"); printText(); 
+		 printText(); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("conyogram",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -906,7 +909,7 @@ class CUP$Parser$actions {
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
-		 addText("ADDED NEW CONSTANT " + id + "."); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("OMG_dec",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1005,7 +1008,7 @@ class CUP$Parser$actions {
           case 17: // super_yaya ::= SUPER_YAYA utos_block 
             {
               Object RESULT =null;
-		 addText("MAIN FUNCTION FOUND!"); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("super_yaya",8, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1215,7 +1218,7 @@ class CUP$Parser$actions {
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 addText("CREATED NEW CLASS: " + id + "."); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("sub_yaya",16, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1317,7 +1320,7 @@ class CUP$Parser$actions {
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		 addText("DECLARED NEW VARIABLE: " + id + "."); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("arte_dec",23, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1392,7 +1395,7 @@ class CUP$Parser$actions {
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
-		 addText("CREATED NEW FUNCTION: " + id + "."); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("yaya_header",27, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-8)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1404,7 +1407,7 @@ class CUP$Parser$actions {
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-6)).value;
-		 addText("CREATED NEW FUNCTION: " + id + "."); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("yaya_header",27, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1620,7 +1623,7 @@ class CUP$Parser$actions {
           case 83: // utos_dec_nodb ::= utos_likeKapag 
             {
               Object RESULT =null;
-		 addText("IF STATEMENT FOUND!"); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_nodb",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1629,7 +1632,7 @@ class CUP$Parser$actions {
           case 84: // utos_dec_nodb ::= utos_makePalit 
             {
               Object RESULT =null;
-		 addText("SWITCH STATEMENT FOUND!"); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_nodb",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1638,7 +1641,7 @@ class CUP$Parser$actions {
           case 85: // utos_dec_nodb ::= utos_likeHabang 
             {
               Object RESULT =null;
-		 addText("WHILE LOOP FOUND!"); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_nodb",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1647,7 +1650,7 @@ class CUP$Parser$actions {
           case 86: // utos_dec_nodb ::= utos_makeGawaHabang 
             {
               Object RESULT =null;
-		 addText("DO WHILE LOOP FOUND!"); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_nodb",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1656,7 +1659,7 @@ class CUP$Parser$actions {
           case 87: // utos_dec_nodb ::= utos_makeUlit 
             {
               Object RESULT =null;
-		 addText("FOR LOOP FOUND!"); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_nodb",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1719,7 +1722,7 @@ class CUP$Parser$actions {
           case 94: // utos_dec_db ::= utos_makeKuha DB 
             {
               Object RESULT =null;
-		 addText("ASSIGNMENT STATEMENT FOUND!"); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_db",41, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1728,7 +1731,7 @@ class CUP$Parser$actions {
           case 95: // utos_dec_db ::= utos_makeSulat DB 
             {
               Object RESULT =null;
-		 addText("OUTPUT FUNCTION FOUND!"); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_db",41, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1737,7 +1740,7 @@ class CUP$Parser$actions {
           case 96: // utos_dec_db ::= utos_makeSabi DB 
             {
               Object RESULT =null;
-		 addText("STANDALONE EXPRESSION FOUND!"); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_db",41, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1746,7 +1749,7 @@ class CUP$Parser$actions {
           case 97: // utos_dec_db ::= BREAKUP DB 
             {
               Object RESULT =null;
-		 addText("BREAK FOUND!"); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_db",41, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1755,7 +1758,7 @@ class CUP$Parser$actions {
           case 98: // utos_dec_db ::= MAKEUP DB 
             {
               Object RESULT =null;
-		 addText("CONTINUE FOUND!"); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_db",41, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1791,7 +1794,7 @@ class CUP$Parser$actions {
           case 102: // utos_dec_val ::= utos_makeBasa 
             {
               Object RESULT =null;
-		 addText("INPUT FUNCTION FOUND!"); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_val",42, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1830,7 +1833,7 @@ class CUP$Parser$actions {
 		int vnleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
 		int vnright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
 		String vn = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
-		 addText("FUNCTION CALL FOUND:  " + vn); 
+
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_makeTawag",44, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;

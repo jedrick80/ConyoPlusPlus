@@ -8,55 +8,14 @@ instead expected token classes are [RIGHT_PAREN]
 instead expected token classes are [MAKE_KUHA, DB]
 instead expected token classes are [MAKE_KUHA, DB, LEFT_BRACE]
 instead expected token classes are [error, LEFT_PAREN]
-PROGRAM PARSED.
-
-ADDED NEW CONSTANT PI.	
 ERROR! Line: 2, Column: 24 - Syntax error in Constant Declaration	
-CREATED NEW FUNCTION: printAllExceptAlpha.	
-DECLARED NEW VARIABLE: i.	
-FUNCTION CALL FOUND:  names:length	
 ERROR! Line: 10, Column: 16 - Syntax error in IF statement	
-FOR LOOP FOUND!	
 ERROR! Line: 12, Column: 30 - Syntax error in OUTPUT function	
-CONTINUE FOUND!	
 ERROR! Line: 16, Column: 3 - Syntax error in code block	
-CREATED NEW FUNCTION: search.	
-FUNCTION CALL FOUND:  list:length	
-DECLARED NEW VARIABLE: i.	
-FUNCTION CALL FOUND:  indicesadd	
-IF STATEMENT FOUND!	
 ERROR! Line: 31, Column: 15 - Syntax error in MAKESABI function	
-WHILE LOOP FOUND!	
-CREATED NEW FUNCTION: createNames.	
-ASSIGNMENT STATEMENT FOUND!	
-BREAK FOUND!	
-ASSIGNMENT STATEMENT FOUND!	
-BREAK FOUND!	
 ERROR! Line: 43, Column: 7 - Syntax error in the last case of a SWITCH statement	
-SWITCH STATEMENT FOUND!	
-CREATED NEW FUNCTION: adderFunction.	
-ASSIGNMENT STATEMENT FOUND!	
-CREATED NEW FUNCTION: printSomething.	
 ERROR! Line: 54, Column: 18 - Syntax error in OUTPUT function	
 ERROR! Line: 59, Column: 21 - Syntax error in Variable Declaration	
-FUNCTION CALL FOUND:  adderFunction	
-ASSIGNMENT STATEMENT FOUND!	
 ERROR! Line: 61, Column: 12 - Syntax error	
-FUNCTION CALL FOUND:  printSomething	
-FUNCTION CALL FOUND:  createNames	
-FUNCTION CALL FOUND:  printAllExceptAlpha	
-FUNCTION CALL FOUND:  createNames	
-FUNCTION CALL FOUND:  search	
-OUTPUT FUNCTION FOUND!	
-INPUT FUNCTION FOUND!	
-INPUT FUNCTION FOUND!	
-ASSIGNMENT STATEMENT FOUND!	
 ERROR! Line: 67, Column: 24 - Syntax error in SCAN function	
-ASSIGNMENT STATEMENT FOUND!	
-OUTPUT FUNCTION FOUND!	
-OUTPUT FUNCTION FOUND!	
-OUTPUT FUNCTION FOUND!	
-IF STATEMENT FOUND!	
-FOR LOOP FOUND!	
-MAIN FUNCTION FOUND!	
 
