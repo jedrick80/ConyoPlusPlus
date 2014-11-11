@@ -777,9 +777,37 @@ public class Parser extends java_cup.runtime.lr_parser {
 
 
 	StringBuilder sb = new StringBuilder();
+	
+	/*Error reporting*/
+	public void report_error(String message, Object info) {
+		sb.append("ERROR! ");
+		
+		/*Code borrowed from ycalc.cup*/
+        if (info instanceof java_cup.runtime.Symbol) 
+		{
+            java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
+   
+			/*Line number*/
+            if (s.left >= 0) 
+			{                
+                sb.append("Line: " +(s.left+1));   
+				/*Column number*/
+                if (s.right >= 0)                    
+                    sb.append(", Column: " +(s.right+1));
+            }
+        }
+		 
+		sb.append(" - " +message);
+	}   
+	public void report_fatal_error(String message, Object info) {
+		report_error(message, info);
+		throw new RuntimeException("Fatal Syntax Error");
+	}
+	
 	public void addText(String text)
 	{
 		sb.append(text);
+		//sb.append(" - Line " + MainConyo.s.lineNo());
 		sb.append("\t\n");
 	}
 	public void printText()
@@ -875,13 +903,10 @@ class CUP$Parser$actions {
           case 6: // OMG_dec ::= OMG IDENTIFIER MAKE_KUHA sabi_sabi DB 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-4)).value;
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
-		 addText("ADDED NEW CONSTANT " + id + "." + "Line: " + n.toString()); 
+		 addText("ADDED NEW CONSTANT " + id + "."); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("OMG_dec",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -890,10 +915,7 @@ class CUP$Parser$actions {
           case 7: // OMG_dec ::= OMG error DB 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		 addText("Error in Constant Declaration at line " + n.toString()); 
+		 addText(" in Constant Declaration"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("OMG_dec",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -902,7 +924,7 @@ class CUP$Parser$actions {
           case 8: // OMG_dec ::= error DB 
             {
               Object RESULT =null;
-		 addText("Erroneous statement found before main and function declarations"); 
+		 addText(" before main and function declarations"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("OMG_dec",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1304,10 +1326,7 @@ class CUP$Parser$actions {
           case 51: // arte_dec ::= MAKE_ARTE error DB 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		 addText("Error in Variable Declaration at line " + n.toString()); 
+		 addText(" in Variable Declaration"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("arte_dec",23, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1520,7 +1539,7 @@ class CUP$Parser$actions {
           case 74: // utos_block ::= error 
             {
               Object RESULT =null;
-		 addText("Error in code block"); 
+		 addText(" in code block"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_block",36, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1592,7 +1611,7 @@ class CUP$Parser$actions {
           case 82: // utos_dec ::= error 
             {
               Object RESULT =null;
-		 addText("Erroneous statement found"); 
+		 addText(""); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec",39, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1655,10 +1674,7 @@ class CUP$Parser$actions {
           case 89: // utos_dec_nodb ::= LIKE_KAPAG error 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 addText("Erroneous statement found in IF statement at line " + n.toString()); 
+		 addText(" in IF statement"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_nodb",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1667,10 +1683,7 @@ class CUP$Parser$actions {
           case 90: // utos_dec_nodb ::= MAKE_PALIT error DB 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		 addText("Erroneous statement found in SWITCH statement at line " + n.toString()); 
+		 addText(" in SWITCH statement"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_nodb",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1679,10 +1692,7 @@ class CUP$Parser$actions {
           case 91: // utos_dec_nodb ::= LIKE_HABANG error DB 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		 addText("Erroneous statement found in WHILE LOOP at line " + n.toString()); 
+		 addText(" in WHILE LOOP"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_nodb",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1691,10 +1701,7 @@ class CUP$Parser$actions {
           case 92: // utos_dec_nodb ::= MAKE_GAWA error DB 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		 addText("Erroneous statement found in DO WHILE LOOP at line " + n.toString()); 
+		 addText(" in DO WHILE LOOP"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_nodb",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1703,10 +1710,7 @@ class CUP$Parser$actions {
           case 93: // utos_dec_nodb ::= MAKE_ULIT error DB 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		 addText("Erroneous statement found in FOR LOOP at line " + n.toString()); 
+		 addText(" in FOR LOOP"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_nodb",40, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1760,10 +1764,7 @@ class CUP$Parser$actions {
           case 99: // utos_dec_db ::= MAKE_SULAT error DB 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		 addText("Erroneous statement found in OUTPUT function at line " + n.toString()); 
+		 addText(" in OUTPUT function"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_db",41, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1772,10 +1773,7 @@ class CUP$Parser$actions {
           case 100: // utos_dec_db ::= MAKE_SABI error DB 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		 addText("Erroneous statement found in MAKESABI function at line " + n.toString()); 
+		 addText(" in MAKESABI function"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_db",41, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1802,10 +1800,7 @@ class CUP$Parser$actions {
           case 103: // utos_dec_val ::= MAKE_TAWAG error 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 addText("Erroneous statement found in FUNCTION CALL at line " + n.toString()); 
+		 addText(" in FUNCTION CALL"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_val",42, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1814,10 +1809,7 @@ class CUP$Parser$actions {
           case 104: // utos_dec_val ::= MAKE_BASA error 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 addText("Erroneous statement found in SCAN function at line " + n.toString()); 
+		 addText(" in SCAN function"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_dec_val",42, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1901,10 +1893,7 @@ class CUP$Parser$actions {
           case 113: // utos_thisNalang ::= THIS_NALANG error DB 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		 addText("Erroneous statement found in ELSE statement at line " + n.toString()); 
+		 addText(" in ELSE statement"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_thisNalang",48, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1913,10 +1902,7 @@ class CUP$Parser$actions {
           case 114: // utos_thisNalang ::= THIS_NALANG_KAPAG error DB 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		 addText("Erroneous statement found in ELSE IF statement at line " + n.toString()); 
+		 addText(" in ELSE IF statement"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("utos_thisNalang",48, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1943,10 +1929,7 @@ class CUP$Parser$actions {
           case 117: // makePalit_MRW ::= MRW error DB 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		 addText("Erroneous statement found in one of the cases of a SWITCH statement at line " + n.toString()); 
+		 addText(" in one of the cases of a SWITCH statement"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("makePalit_MRW",50, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1964,10 +1947,7 @@ class CUP$Parser$actions {
           case 119: // makePalit_MRW ::= MDR error DB 
             {
               Object RESULT =null;
-		int nleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int nright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Object n = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		 addText("Erroneous statement found in the last case of a SWITCH statement at line " + n.toString()); 
+		 addText(" in the last case of a SWITCH statement"); 
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("makePalit_MRW",50, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;

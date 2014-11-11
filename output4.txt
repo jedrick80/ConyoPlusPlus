@@ -10,38 +10,38 @@ instead expected token classes are [MAKE_KUHA, DB, LEFT_BRACE]
 instead expected token classes are [error, LEFT_PAREN]
 PROGRAM PARSED.
 
-ADDED NEW CONSTANT PI.Line: 1	
-Error in Constant Declaration at line 2	
+ADDED NEW CONSTANT PI.	
+ERROR! Line: 2, Column: 24 - Syntax error in Constant Declaration	
 CREATED NEW FUNCTION: printAllExceptAlpha.	
 DECLARED NEW VARIABLE: i.	
 FUNCTION CALL FOUND:  names:length	
-Erroneous statement found in IF statement at line 10	
+ERROR! Line: 10, Column: 16 - Syntax error in IF statement	
 FOR LOOP FOUND!	
-Erroneous statement found in OUTPUT function at line 12	
+ERROR! Line: 12, Column: 30 - Syntax error in OUTPUT function	
 CONTINUE FOUND!	
-Error in code block	
+ERROR! Line: 16, Column: 3 - Syntax error in code block	
 CREATED NEW FUNCTION: search.	
 FUNCTION CALL FOUND:  list:length	
 DECLARED NEW VARIABLE: i.	
 FUNCTION CALL FOUND:  indicesadd	
 IF STATEMENT FOUND!	
-Erroneous statement found in MAKESABI function at line 31	
+ERROR! Line: 31, Column: 15 - Syntax error in MAKESABI function	
 WHILE LOOP FOUND!	
 CREATED NEW FUNCTION: createNames.	
 ASSIGNMENT STATEMENT FOUND!	
 BREAK FOUND!	
 ASSIGNMENT STATEMENT FOUND!	
 BREAK FOUND!	
-Erroneous statement found in the last case of a SWITCH statement at line 43	
+ERROR! Line: 43, Column: 7 - Syntax error in the last case of a SWITCH statement	
 SWITCH STATEMENT FOUND!	
 CREATED NEW FUNCTION: adderFunction.	
 ASSIGNMENT STATEMENT FOUND!	
 CREATED NEW FUNCTION: printSomething.	
-Erroneous statement found in OUTPUT function at line 54	
-Error in Variable Declaration at line 59	
+ERROR! Line: 54, Column: 18 - Syntax error in OUTPUT function	
+ERROR! Line: 59, Column: 21 - Syntax error in Variable Declaration	
 FUNCTION CALL FOUND:  adderFunction	
 ASSIGNMENT STATEMENT FOUND!	
-Erroneous statement found	
+ERROR! Line: 61, Column: 12 - Syntax error	
 FUNCTION CALL FOUND:  printSomething	
 FUNCTION CALL FOUND:  createNames	
 FUNCTION CALL FOUND:  printAllExceptAlpha	
@@ -51,7 +51,7 @@ OUTPUT FUNCTION FOUND!
 INPUT FUNCTION FOUND!	
 INPUT FUNCTION FOUND!	
 ASSIGNMENT STATEMENT FOUND!	
-Erroneous statement found in SCAN function at line 67	
+ERROR! Line: 67, Column: 24 - Syntax error in SCAN function	
 ASSIGNMENT STATEMENT FOUND!	
 OUTPUT FUNCTION FOUND!	
 OUTPUT FUNCTION FOUND!	
