@@ -53,29 +53,29 @@ float = {integer}\.{integer}(e{integer})?
 
 %%
 /*Keywords*/
-<YYINITIAL> "OMG" {return symbol(sym.OMG);}
-<YYINITIAL> "hireYaya" {return symbol(sym.HIRE_YAYA);}
-<YYINITIAL> "bayad" {return symbol(sym.BAYAD);}
-<YYINITIAL> "makeBalik" {return symbol(sym.MAKE_BALIK);}
-<YYINITIAL> "superYaya" {return symbol(sym.SUPER_YAYA);}
-<YYINITIAL> "makeArte" {return symbol(sym.MAKE_ARTE);}
-<YYINITIAL> "brandNew" {return symbol(sym.BRAND_NEW);}
-<YYINITIAL> "makeUtusan" {return symbol(sym.MAKE_UTUSAN);}
-<YYINITIAL> "breakup" {return symbol(sym.BREAKUP);}
-<YYINITIAL> "makeup" {return symbol(sym.MAKEUP);}
-<YYINITIAL> "makeTawag" {return symbol(sym.MAKE_TAWAG);}
-<YYINITIAL> "makeSulat" {return symbol(sym.MAKE_SULAT);}
-<YYINITIAL> "makeBasa" {return symbol(sym.MAKE_BASA);}
-<YYINITIAL> "likeKapag" {return symbol(sym.LIKE_KAPAG);}
-<YYINITIAL> "thisNalang" {return symbol(sym.THIS_NALANG);}
-<YYINITIAL> "thisNalangKapag" {return symbol(sym.THIS_NALANG_KAPAG);}
-<YYINITIAL> "makePalit" {return symbol(sym.MAKE_PALIT);}
-<YYINITIAL> "MRW" {return symbol(sym.MRW);}
-<YYINITIAL> "MDR" {return symbol(sym.MDR);}
-<YYINITIAL> "likeHabang" {return symbol(sym.LIKE_HABANG);}
-<YYINITIAL> "makeGawa" {return symbol(sym.MAKE_GAWA);}
-<YYINITIAL> "makeUlit" {return symbol(sym.MAKE_ULIT);}
-<YYINITIAL> "makeSabi" {return symbol(sym.MAKE_SABI);}
+<YYINITIAL> "OMG" {return symbol(sym.OMG, yyline+1);}
+<YYINITIAL> "hireYaya" {return symbol(sym.HIRE_YAYA, yyline+1);}
+<YYINITIAL> "bayad" {return symbol(sym.BAYAD, yyline+1);}
+<YYINITIAL> "makeBalik" {return symbol(sym.MAKE_BALIK, yyline+1);}
+<YYINITIAL> "superYaya" {return symbol(sym.SUPER_YAYA, yyline+1);}
+<YYINITIAL> "makeArte" {return symbol(sym.MAKE_ARTE, yyline+1);}
+<YYINITIAL> "brandNew" {return symbol(sym.BRAND_NEW, yyline+1);}
+<YYINITIAL> "makeUtusan" {return symbol(sym.MAKE_UTUSAN, yyline+1);}
+<YYINITIAL> "breakup" {return symbol(sym.BREAKUP, yyline+1);}
+<YYINITIAL> "makeup" {return symbol(sym.MAKEUP, yyline+1);}
+<YYINITIAL> "makeTawag" {return symbol(sym.MAKE_TAWAG, yyline+1);}
+<YYINITIAL> "makeSulat" {return symbol(sym.MAKE_SULAT, yyline+1);}
+<YYINITIAL> "makeBasa" {return symbol(sym.MAKE_BASA, yyline+1);}
+<YYINITIAL> "likeKapag" {return symbol(sym.LIKE_KAPAG, yyline+1);}
+<YYINITIAL> "thisNalang" {return symbol(sym.THIS_NALANG, yyline+1);}
+<YYINITIAL> "thisNalangKapag" {return symbol(sym.THIS_NALANG_KAPAG, yyline+1);}
+<YYINITIAL> "makePalit" {return symbol(sym.MAKE_PALIT, yyline+1);}
+<YYINITIAL> "MRW" {return symbol(sym.MRW, yyline+1);}
+<YYINITIAL> "MDR" {return symbol(sym.MDR, yyline+1);}
+<YYINITIAL> "likeHabang" {return symbol(sym.LIKE_HABANG, yyline+1);}
+<YYINITIAL> "makeGawa" {return symbol(sym.MAKE_GAWA, yyline+1);}
+<YYINITIAL> "makeUlit" {return symbol(sym.MAKE_ULIT, yyline+1);}
+<YYINITIAL> "makeSabi" {return symbol(sym.MAKE_SABI, yyline+1);}
 <YYINITIAL> "inty" {return symbol(sym.INTY, yytext());}
 <YYINITIAL> "floaty" {return symbol(sym.FLOATY, yytext());}
 <YYINITIAL> "chary" {return symbol(sym.CHARY, yytext());}
@@ -85,8 +85,8 @@ float = {integer}\.{integer}(e{integer})?
 <YYINITIAL> "nuhh" {return symbol(sym.BOOL_LITERAL, yytext());}
 <YYINITIAL> "poor" {return symbol(sym.POOR, yytext());}
 <YYINITIAL> "waley" {return symbol(sym.WALEY, yytext());}
-<YYINITIAL> "makeKuha" {return symbol(sym.MAKE_KUHA);}
-<YYINITIAL> "makeSimula" {return symbol(sym.MAKE_SIMULA);}
+<YYINITIAL> "makeKuha" {return symbol(sym.MAKE_KUHA, yyline+1);}
+<YYINITIAL> "makeSimula" {return symbol(sym.MAKE_SIMULA, yyline+1);}
 <YYINITIAL> "db" {return symbol(sym.DB);}
 
 /*YYINITIAL State*/

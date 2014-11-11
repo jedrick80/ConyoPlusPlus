@@ -1,0 +1,62 @@
+instead expected token classes are []
+instead expected token classes are [RIGHT_PAREN, LEFT_BRACE, PLUS, MINUS, TIMES, DIVIDE, MODULO, NOT_EQUAL, LESS_THAN, LT_EQUAL, GREATER_THAN, GT_EQUAL, EQUAL_EQUAL, AND, OR, POS_INC, NEG_INC]
+instead expected token classes are [RIGHT_PAREN]
+instead expected token classes are [HIRE_YAYA, SUPER_YAYA, MAKE_UTUSAN]
+instead expected token classes are [MAKE_TAWAG, MAKE_BASA, LEFT_PAREN, PLUS, MINUS, NOT, IDENTIFIER, STRING_LITERAL, CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, BOOL_LITERAL, WALEY]
+instead expected token classes are [error, COLON]
+instead expected token classes are [RIGHT_PAREN]
+instead expected token classes are [MAKE_KUHA, DB]
+instead expected token classes are [MAKE_KUHA, DB, LEFT_BRACE]
+instead expected token classes are [error, LEFT_PAREN]
+PROGRAM PARSED.
+
+ADDED NEW CONSTANT PI.Line: 1	
+Error in Constant Declaration at line 2	
+CREATED NEW FUNCTION: printAllExceptAlpha.	
+DECLARED NEW VARIABLE: i.	
+FUNCTION CALL FOUND:  names:length	
+Erroneous statement found in IF statement at line 10	
+FOR LOOP FOUND!	
+Erroneous statement found in OUTPUT function at line 12	
+CONTINUE FOUND!	
+Error in code block	
+CREATED NEW FUNCTION: search.	
+FUNCTION CALL FOUND:  list:length	
+DECLARED NEW VARIABLE: i.	
+FUNCTION CALL FOUND:  indicesadd	
+IF STATEMENT FOUND!	
+Erroneous statement found in MAKESABI function at line 31	
+WHILE LOOP FOUND!	
+CREATED NEW FUNCTION: createNames.	
+ASSIGNMENT STATEMENT FOUND!	
+BREAK FOUND!	
+ASSIGNMENT STATEMENT FOUND!	
+BREAK FOUND!	
+Erroneous statement found in the last case of a SWITCH statement at line 43	
+SWITCH STATEMENT FOUND!	
+CREATED NEW FUNCTION: adderFunction.	
+ASSIGNMENT STATEMENT FOUND!	
+CREATED NEW FUNCTION: printSomething.	
+Erroneous statement found in OUTPUT function at line 54	
+Error in Variable Declaration at line 59	
+FUNCTION CALL FOUND:  adderFunction	
+ASSIGNMENT STATEMENT FOUND!	
+Erroneous statement found	
+FUNCTION CALL FOUND:  printSomething	
+FUNCTION CALL FOUND:  createNames	
+FUNCTION CALL FOUND:  printAllExceptAlpha	
+FUNCTION CALL FOUND:  createNames	
+FUNCTION CALL FOUND:  search	
+OUTPUT FUNCTION FOUND!	
+INPUT FUNCTION FOUND!	
+INPUT FUNCTION FOUND!	
+ASSIGNMENT STATEMENT FOUND!	
+Erroneous statement found in SCAN function at line 67	
+ASSIGNMENT STATEMENT FOUND!	
+OUTPUT FUNCTION FOUND!	
+OUTPUT FUNCTION FOUND!	
+OUTPUT FUNCTION FOUND!	
+IF STATEMENT FOUND!	
+FOR LOOP FOUND!	
+MAIN FUNCTION FOUND!	
+

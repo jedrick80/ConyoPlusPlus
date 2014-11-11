@@ -967,15 +967,15 @@ class ConyoLexer implements java_cup.runtime.Scanner {
           }
         case 107: break;
         case 38: 
-          { return symbol(sym.OMG);
+          { return symbol(sym.OMG, yyline+1);
           }
         case 108: break;
         case 39: 
-          { return symbol(sym.MRW);
+          { return symbol(sym.MRW, yyline+1);
           }
         case 109: break;
         case 40: 
-          { return symbol(sym.MDR);
+          { return symbol(sym.MDR, yyline+1);
           }
         case 110: break;
         case 41: 
@@ -991,7 +991,7 @@ class ConyoLexer implements java_cup.runtime.Scanner {
           }
         case 113: break;
         case 44: 
-          { return symbol(sym.BAYAD);
+          { return symbol(sym.BAYAD, yyline+1);
           }
         case 114: break;
         case 45: 
@@ -1007,7 +1007,7 @@ class ConyoLexer implements java_cup.runtime.Scanner {
           }
         case 117: break;
         case 48: 
-          { return symbol(sym.MAKEUP);
+          { return symbol(sym.MAKEUP, yyline+1);
           }
         case 118: break;
         case 49: 
@@ -1015,7 +1015,7 @@ class ConyoLexer implements java_cup.runtime.Scanner {
           }
         case 119: break;
         case 50: 
-          { return symbol(sym.BREAKUP);
+          { return symbol(sym.BREAKUP, yyline+1);
           }
         case 120: break;
         case 51: 
@@ -1023,79 +1023,79 @@ class ConyoLexer implements java_cup.runtime.Scanner {
           }
         case 121: break;
         case 52: 
-          { return symbol(sym.HIRE_YAYA);
+          { return symbol(sym.HIRE_YAYA, yyline+1);
           }
         case 122: break;
         case 53: 
-          { return symbol(sym.BRAND_NEW);
+          { return symbol(sym.BRAND_NEW, yyline+1);
           }
         case 123: break;
         case 54: 
-          { return symbol(sym.MAKE_GAWA);
+          { return symbol(sym.MAKE_GAWA, yyline+1);
           }
         case 124: break;
         case 55: 
-          { return symbol(sym.MAKE_BASA);
+          { return symbol(sym.MAKE_BASA, yyline+1);
           }
         case 125: break;
         case 56: 
-          { return symbol(sym.MAKE_ARTE);
+          { return symbol(sym.MAKE_ARTE, yyline+1);
           }
         case 126: break;
         case 57: 
-          { return symbol(sym.MAKE_ULIT);
+          { return symbol(sym.MAKE_ULIT, yyline+1);
           }
         case 127: break;
         case 58: 
-          { return symbol(sym.MAKE_SABI);
+          { return symbol(sym.MAKE_SABI, yyline+1);
           }
         case 128: break;
         case 59: 
-          { return symbol(sym.MAKE_KUHA);
+          { return symbol(sym.MAKE_KUHA, yyline+1);
           }
         case 129: break;
         case 60: 
-          { return symbol(sym.MAKE_BALIK);
+          { return symbol(sym.MAKE_BALIK, yyline+1);
           }
         case 130: break;
         case 61: 
-          { return symbol(sym.MAKE_TAWAG);
+          { return symbol(sym.MAKE_TAWAG, yyline+1);
           }
         case 131: break;
         case 62: 
-          { return symbol(sym.MAKE_SULAT);
+          { return symbol(sym.MAKE_SULAT, yyline+1);
           }
         case 132: break;
         case 63: 
-          { return symbol(sym.MAKE_PALIT);
+          { return symbol(sym.MAKE_PALIT, yyline+1);
           }
         case 133: break;
         case 64: 
-          { return symbol(sym.LIKE_KAPAG);
+          { return symbol(sym.LIKE_KAPAG, yyline+1);
           }
         case 134: break;
         case 65: 
-          { return symbol(sym.SUPER_YAYA);
+          { return symbol(sym.SUPER_YAYA, yyline+1);
           }
         case 135: break;
         case 66: 
-          { return symbol(sym.MAKE_UTUSAN);
+          { return symbol(sym.MAKE_UTUSAN, yyline+1);
           }
         case 136: break;
         case 67: 
-          { return symbol(sym.MAKE_SIMULA);
+          { return symbol(sym.MAKE_SIMULA, yyline+1);
           }
         case 137: break;
         case 68: 
-          { return symbol(sym.LIKE_HABANG);
+          { return symbol(sym.LIKE_HABANG, yyline+1);
           }
         case 138: break;
         case 69: 
-          { return symbol(sym.THIS_NALANG);
+          { return symbol(sym.THIS_NALANG, yyline+1);
           }
         case 139: break;
         case 70: 
-          { return symbol(sym.THIS_NALANG_KAPAG);
+          { return symbol(sym.THIS_NALANG_KAPAG, yyline+1);
           }
         case 140: break;
         default: 

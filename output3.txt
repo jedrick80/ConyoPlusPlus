@@ -1,0 +1,11 @@
+instead expected token classes are [HIRE_YAYA, SUPER_YAYA, MAKE_UTUSAN]
+instead expected token classes are [EOF]
+PROGRAM PARSED.
+
+Erroneous statement found before main and function declarations	
+ADDED NEW CONSTANT asdf.	
+DECLARED NEW VARIABLE: jkl.	
+OUTPUT FUNCTION FOUND!	
+Error in code block	
+MAIN FUNCTION FOUND!	
+
