@@ -440,6 +440,11 @@ class ConyoLexer implements java_cup.runtime.Scanner {
 	private Symbol symbol(int type, Object value) {
 		return new Symbol(type, yyline, yycolumn, value);
 	}
+	
+	public int lineNo()
+	{
+		return yyline;
+	}
 
 
   /**

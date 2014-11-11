@@ -755,6 +755,7 @@ public class Parser extends java_cup.runtime.lr_parser {
 	public void addText(String text)
 	{
 		sb.append(text);
+		sb.append(" - Line " + MainConyo.s.lineNo());
 		sb.append("\t\n");
 	}
 	public void printText()

@@ -1,5 +1,8 @@
 OMG PI makeKuha 3.14 db 
 
+
+
+
 hireYaya printAllExceptAlpha bayad (stringy[] names) makeBalik poor
 $
 	makeArte inty i db

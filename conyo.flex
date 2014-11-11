@@ -26,6 +26,11 @@ import java_cup.runtime.*;
 	private Symbol symbol(int type, Object value) {
 		return new Symbol(type, yyline, yycolumn, value);
 	}
+	
+	public int lineNo()
+	{
+		return yyline;
+	}
 %}
 
 /*Regular Expressions*/
