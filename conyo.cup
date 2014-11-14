@@ -2,14 +2,45 @@ import java_cup.runtime.*;
 
 parser code {:
 	StringBuilder sb = new StringBuilder();
+	
+	/*Error reporting*/
+	public void report_error(String message, Object info) {
+		sb.append("ERROR! ");
+		
+		/*Code borrowed from ycalc.cup*/
+        if (info instanceof java_cup.runtime.Symbol) 
+		{
+            java_cup.runtime.Symbol s = ((java_cup.runtime.Symbol) info);
+   
+			/*Line number*/
+            if (s.left >= 0) 
+			{                
+                sb.append("Line: " +(s.left+1));   
+				/*Column number*/
+                if (s.right >= 0)                    
+                    sb.append(", Column: " +(s.right+1));
+            }
+        }
+		 
+		sb.append(" - " +message);
+	}   
+	public void report_fatal_error(String message, Object info) {
+		report_error(message, info);
+		throw new RuntimeException("Fatal Syntax Error");
+	}
+	
 	public void addText(String text)
 	{
 		sb.append(text);
+		//sb.append(" - Line " + MainConyo.s.lineNo());
 		sb.append("\t\n");
 	}
 	public void printText()
 	{
-		System.out.println(sb);
+		if(sb.length() > 0)
+			System.out.println(sb);
+		else
+			System.out.println("DONE.");
 	}
 :};
 
@@ -47,14 +78,13 @@ non terminal			yaya_list;
 non terminal			sub_yaya_section;
 non terminal			sub_yaya_list;
 non terminal			super_yaya;
-non terminal			error_checking;
 /*Literals, Data Types, Names*/
 non terminal			literal;
 non terminal String		data_type;
 non terminal			primitive_dt;
 non terminal			reference_dt;
 non terminal			array_dt;
-non terminal			valid_name;
+non terminal String		valid_name;
 non terminal			valid_var;
 /*Class Declaration Productions*/
 non terminal			sub_yaya;
@@ -133,7 +163,7 @@ start with conyogram;
 /*Program*/
 
 conyogram ::= OMG_section yaya_section sub_yaya_section super_yaya 
-				{: System.out.println("PROGRAM PARSED.\n"); printText(); :};
+				{: printText(); :};
 
 /*Program Breakdown*/
 
@@ -142,9 +172,8 @@ OMG_list ::= OMG_dec
 			| OMG_dec OMG_list;
 			
 OMG_dec ::= OMG IDENTIFIER:id MAKE_KUHA sabi_sabi DB
-			{: addText("ADDED NEW CONSTANT " + id + "."); :}
-			| OMG error DB {: addText("Error in Constant Declaration"); :}
-			| error DB {: addText("Erroneous statement found before main and function declarations"); :}
+			| OMG error DB {: addText(" in Constant Declaration"); :}
+			| error DB {: addText(" before main and function declarations"); :}
 ;
 
 yaya_section ::= yaya_list | ;
@@ -155,8 +184,7 @@ sub_yaya_section ::= sub_yaya_list | ;
 sub_yaya_list ::= sub_yaya
 				| sub_yaya sub_yaya_list;
 				
-super_yaya ::= SUPER_YAYA utos_block
-				{: addText("MAIN FUNCTION FOUND!"); :};
+super_yaya ::= SUPER_YAYA utos_block;
 
 /*Literals, Data Types, Names*/
 
@@ -179,15 +207,14 @@ reference_dt ::= valid_name
 array_dt ::= primitive_dt brackets
 			| valid_name brackets;
 			
-valid_name ::= IDENTIFIER
-			| valid_name COLON IDENTIFIER %prec LONG_NAME;
+valid_name ::= IDENTIFIER:id {:RESULT = id;:}
+			| valid_name:vn COLON IDENTIFIER:id {:RESULT = vn + ":" + id;:} %prec LONG_NAME;
 valid_var ::= valid_name %prec SHORT_NAME
 			| valid_name ref_brackets;
 			
 /*Class Declaration Productions*/
 
-sub_yaya ::= MAKE_UTUSAN IDENTIFIER:id sy_body
-			{: addText("CREATED NEW CLASS: " + id + "."); :};
+sub_yaya ::= MAKE_UTUSAN IDENTIFIER:id sy_body;
 sy_body ::= DOLLAR_SIGN sy_opt DOLLAR_SIGN;
 sy_opt ::= sy_cont_list | ;
 sy_cont_list ::= sy_cont sy_cont_list
@@ -201,8 +228,7 @@ sy_init ::= BRAND_NEW reference_dt LEFT_PAREN arte_init_list RIGHT_PAREN;
 /*Variable Declaration Productions*/
 
 arte_dec ::= MAKE_ARTE data_type IDENTIFIER:id arte_assign DB
-		{: addText("DECLARED NEW VARIABLE: " + id + "."); :}
-		| MAKE_ARTE error DB {: addText("Error in Variable Declaration"); :};
+		| MAKE_ARTE error DB {: addText(" in Variable Declaration"); :};
 arte_assign ::= MAKE_KUHA arte_init
 			| ;
 arte_init ::= array_init
@@ -214,9 +240,7 @@ arte_init ::= array_init
 yaya ::= yaya_header utos_block;
 
 yaya_header ::= HIRE_YAYA IDENTIFIER:id BAYAD LEFT_PAREN yaya_param_sec RIGHT_PAREN MAKE_BALIK data_type IDENTIFIER
-				{: addText("CREATED NEW FUNCTION: " + id + "."); :}
-			| HIRE_YAYA IDENTIFIER:id BAYAD LEFT_PAREN yaya_param_sec RIGHT_PAREN MAKE_BALIK POOR
-				{: addText("CREATED NEW FUNCTION: " + id + "."); :};
+			| HIRE_YAYA IDENTIFIER:id BAYAD LEFT_PAREN yaya_param_sec RIGHT_PAREN MAKE_BALIK POOR;
 
 yaya_param_sec ::= yaya_param_list | ;
 yaya_param_list ::= yaya_param COMMA yaya_param_list
@@ -237,54 +261,58 @@ ref_brackets ::= LEFT_BRACE ss_OR RIGHT_BRACE;
 
 /*Program Code Productions*/
 
-utos_block ::= DOLLAR_SIGN utos_block_opt DOLLAR_SIGN;
+utos_block ::= DOLLAR_SIGN utos_block_opt DOLLAR_SIGN
+				| error {: addText(" in code block"); :};
 utos_block_opt ::= block_content | ;
 block_content ::= utos_dec block_content
 				| utos_dec;
 utos_dec ::= utos_dec_db 
 			| utos_dec_val DB
-			| utos_dec_nodb;
-utos_dec_nodb ::= utos_likeKapag {: addText("IF STATEMENT FOUND!"); :}
-			| utos_makePalit {: addText("SWITCH STATEMENT FOUND!"); :}
-			| utos_likeHabang {: addText("WHILE LOOP FOUND!"); :}
-			| utos_makeGawaHabang {: addText("DO WHILE LOOP FOUND!"); :}
-			| utos_makeUlit {: addText("FOR LOOP FOUND!"); :}
+			| utos_dec_nodb
+			| error {: addText(""); :};
+utos_dec_nodb ::= utos_likeKapag
+			| utos_makePalit
+			| utos_likeHabang
+			| utos_makeGawaHabang
+			| utos_makeUlit
 			| utos_makeArte
-			| LIKE_KAPAG error DB{: addText("Erroneous statement found in IF statement"); :}
-			| MAKE_PALIT error DB{: addText("Erroneous statement found in SWITCH statement"); :}
-			| LIKE_HABANG error DB{: addText("Erroneous statement found in WHILE LOOP"); :}
-			| MAKE_GAWA error DB{: addText("Erroneous statement found in DO WHILE LOOP"); :}
-			| MAKE_ULIT error DB{: addText("Erroneous statement found in FOR LOOP"); :};
-utos_dec_db ::= utos_makeKuha DB{: addText("ASSIGNMENT STATEMENT FOUND!"); :}
-			| utos_makeSulat DB{: addText("OUTPUT FUNCTION FOUND!"); :}
-			| utos_makeSabi DB{: addText("STANDALONE EXPRESSION FOUND!"); :}
-			| BREAKUP DB{: addText("BREAK FOUND!"); :}
-			| MAKEUP DB{: addText("CONTINUE FOUND!"); :}
-			| MAKE_SULAT error DB{: addText("Erroneous statement found in OUTPUT function"); :}
-			| MAKE_SABI error DB{: addText("Erroneous statement found in MAKESABI function"); :};
-utos_dec_val ::= utos_makeTawag {: addText("FUNCTION CALL FOUND!"); :}
-			| utos_makeBasa {: addText("INPUT FUNCTION FOUND!"); :}
-			| MAKE_TAWAG error DB {: addText("Erroneous statement found in FUNCTION CALL"); :}
-			| MAKE_BASA error DB {: addText("Erroneous statement found in SCAN function"); :};
+			| LIKE_KAPAG error {: addText(" in IF statement"); :}
+			| MAKE_PALIT error DB{: addText(" in SWITCH statement"); :}
+			| LIKE_HABANG error DB{: addText(" in WHILE LOOP"); :}
+			| MAKE_GAWA error DB{: addText(" in DO WHILE LOOP"); :}
+			| MAKE_ULIT error DB{: addText(" in FOR LOOP"); :};
+utos_dec_db ::= utos_makeKuha DB
+			| utos_makeSulat DB
+			| utos_makeSabi DB
+			| BREAKUP DB
+			| MAKEUP DB
+			| MAKE_SULAT error DB{: addText(" in OUTPUT function"); :}
+			| MAKE_SABI error DB{: addText(" in MAKESABI function"); :};
+utos_dec_val ::= utos_makeTawag
+			| utos_makeBasa
+			| MAKE_TAWAG error {: addText(" in FUNCTION CALL"); :}
+			| MAKE_BASA error {: addText(" in SCAN function"); :};
 utos_makeKuha ::= valid_var arte_assign;
-utos_makeTawag ::= MAKE_TAWAG valid_name LEFT_PAREN arte_init_list RIGHT_PAREN;
+utos_makeTawag ::= MAKE_TAWAG valid_name:vn LEFT_PAREN arte_init_list RIGHT_PAREN;
 utos_makeSulat ::= MAKE_SULAT LEFT_PAREN sabi_sabi RIGHT_PAREN;
 utos_makeBasa ::= MAKE_BASA LEFT_PAREN data_type RIGHT_PAREN;
 utos_likeKapag ::= LIKE_KAPAG LEFT_PAREN sabi_sabi RIGHT_PAREN utos_block utos_thisNalang;
 utos_thisNalang ::= THIS_NALANG utos_block
 				| THIS_NALANG_KAPAG LEFT_PAREN sabi_sabi RIGHT_PAREN utos_block utos_thisNalang
-				| ;
+				|
+				| THIS_NALANG error DB {: addText(" in ELSE statement"); :}
+				| THIS_NALANG_KAPAG error DB {: addText(" in ELSE IF statement"); :};
 utos_makePalit ::= MAKE_PALIT LEFT_PAREN sabi_sabi RIGHT_PAREN DOLLAR_SIGN makePalit_MRW DOLLAR_SIGN;
 makePalit_MRW ::= MRW sabi_sabi COLON utos_block_opt makePalit_MRW
-				| MRW error DB {: addText("Erroneous statement found in one of the cases of a SWITCH statement"); :}
+				| MRW error DB {: addText(" in one of the cases of a SWITCH statement"); :}
 				| MDR COLON utos_block_opt
-				| MDR error DB {: addText("Erroneous statement found in the last case of a SWITCH statement"); :}
+				| MDR error DB {: addText(" in the last case of a SWITCH statement"); :}
 				| ;
 
 utos_likeHabang ::= LIKE_HABANG LEFT_PAREN sabi_sabi RIGHT_PAREN utos_block
 				| LIKE_HABANG LEFT_PAREN sabi_sabi RIGHT_PAREN DB;
 utos_makeGawaHabang ::= MAKE_GAWA utos_block LIKE_HABANG LEFT_PAREN sabi_sabi RIGHT_PAREN DB;
-utos_makeUlit ::= MAKE_ULIT LEFT_PAREN utos_makeKuha DB sabi_sabi_for utos_makeKuha RIGHT_PAREN utos_block
+utos_makeUlit ::= MAKE_ULIT LEFT_PAREN utos_makeKuha DB sabi_sabi_for utos_makeKuha RIGHT_PAREN utos_block 
 				| MAKE_ULIT LEFT_PAREN utos_makeKuha DB sabi_sabi_for sabi_sabi_for RIGHT_PAREN utos_block;
 utos_makeArte ::= arte_dec;
 utos_makeSabi ::= MAKE_SABI sabi_sabi;

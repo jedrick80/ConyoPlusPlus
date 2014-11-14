@@ -1,0 +1,21 @@
+instead expected token classes are []
+instead expected token classes are [RIGHT_PAREN, LEFT_BRACE, PLUS, MINUS, TIMES, DIVIDE, MODULO, NOT_EQUAL, LESS_THAN, LT_EQUAL, GREATER_THAN, GT_EQUAL, EQUAL_EQUAL, AND, OR, POS_INC, NEG_INC]
+instead expected token classes are [RIGHT_PAREN]
+instead expected token classes are [HIRE_YAYA, SUPER_YAYA, MAKE_UTUSAN]
+instead expected token classes are [MAKE_TAWAG, MAKE_BASA, LEFT_PAREN, PLUS, MINUS, NOT, IDENTIFIER, STRING_LITERAL, CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, BOOL_LITERAL, WALEY]
+instead expected token classes are [error, COLON]
+instead expected token classes are [RIGHT_PAREN]
+instead expected token classes are [MAKE_KUHA, DB]
+instead expected token classes are [MAKE_KUHA, DB, LEFT_BRACE]
+instead expected token classes are [error, LEFT_PAREN]
+ERROR! Line: 2, Column: 24 - Syntax error in Constant Declaration	
+ERROR! Line: 10, Column: 16 - Syntax error in IF statement	
+ERROR! Line: 12, Column: 30 - Syntax error in OUTPUT function	
+ERROR! Line: 16, Column: 3 - Syntax error in code block	
+ERROR! Line: 31, Column: 15 - Syntax error in MAKESABI function	
+ERROR! Line: 43, Column: 7 - Syntax error in the last case of a SWITCH statement	
+ERROR! Line: 54, Column: 18 - Syntax error in OUTPUT function	
+ERROR! Line: 59, Column: 21 - Syntax error in Variable Declaration	
+ERROR! Line: 61, Column: 12 - Syntax error	
+ERROR! Line: 67, Column: 24 - Syntax error in SCAN function	
+
